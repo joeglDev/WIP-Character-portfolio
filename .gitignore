@@ -1,0 +1,4 @@
+*.js
+*.txt
+*.env
+node_modules
