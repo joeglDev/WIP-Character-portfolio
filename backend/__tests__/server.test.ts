@@ -5,7 +5,7 @@
 
 
 const request = require("supertest");
-import app from "../server.js";
+import app from "../server";
 
 describe("login", () => {
     test("invalid login should return 404 and err body", () => {
