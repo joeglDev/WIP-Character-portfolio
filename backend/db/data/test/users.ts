@@ -18,4 +18,4 @@ const userData: userData[] = [
     }
 ];
 
-export default usersData;
+export default userData;

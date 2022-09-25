@@ -1,6 +1,8 @@
 //note- production will need a seed with collections but no data
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
+import userData from "../data/test/users.js";
+
 
 // Connection URL
 let client:any;
@@ -18,10 +20,17 @@ async function main() {
   await client.connect();
   console.log("Connected successfully to server");
   const db = client.db(dbName);
+
+  //drop collections
+  await  db.dropCollection("users")
+ 
+  //create collections
   const users = db.collection("users");
 
+  
+
   //insert users data
-  const insertResult = await users.insertMany();
+  const insertResult = await users.insertMany(userData);
   console.log('Inserted documents =>', insertResult);
   // test for fetch users
   const findResult = await users.find({}).toArray();
