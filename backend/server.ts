@@ -5,6 +5,9 @@ import Endpoints from "./Endpoints.js";
 const app = express();
 const port = 9124;
 
+//middleware
+app.use(express.json());
+
 //paths
 app.get(Endpoints.getLogin, getLogin)
 
