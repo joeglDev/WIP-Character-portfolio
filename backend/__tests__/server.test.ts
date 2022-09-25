@@ -1,6 +1,4 @@
-//test user login
-//fail: {"username": "invalid", "password": "notPassword"}
-//pass: {"username": "test1", "password": "password"}
+
 
 const request = require("supertest");
 import app from "../server";
