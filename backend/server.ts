@@ -1,4 +1,4 @@
-import express from "express";
+import express = require("express");
 import postLogin from "./controllers/controller-funcs";
 import Endpoints from "./Endpoints";
 
