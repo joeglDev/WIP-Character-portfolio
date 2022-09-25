@@ -1,5 +1,5 @@
 class Endpoints  {
-    static getLogin:string = "placeholder";
+    static getLogin:string = "/login";
 };
 
 export default Endpoints;
