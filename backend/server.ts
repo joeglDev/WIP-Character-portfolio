@@ -1,4 +1,4 @@
-import express from "express";
+import * as express from "express";
 import postLogin from "./controllers/controller-funcs";
 import Endpoints from "./Endpoints";
 
