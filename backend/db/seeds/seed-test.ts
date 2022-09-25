@@ -1,3 +1,4 @@
+//note- production will need a seed with collections but no data
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 
@@ -19,7 +20,9 @@ async function main() {
   const db = client.db(dbName);
   const users = db.collection("users");
 
-  //next define suers table and seed
+  //insert users data
+  const insertResult = await users.insertMany();
+  console.log('Inserted documents =>', insertResult);
   // test for fetch users
   const findResult = await users.find({}).toArray();
 console.log('Found documents =>', findResult);
