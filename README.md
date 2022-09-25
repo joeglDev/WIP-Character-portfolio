@@ -5,5 +5,5 @@ A personal project to display user generated fictional characters in an aestheti
 ## Stack
 
 - Language - TypeScript
-- Back-End - Node.js, express.js?, passport.js (authentification), firebase noSQL DB
+- Back-End - Node.js / express.js (server), passport.js (authentification), mongoDB (noSQL database)
 - Front-End - React
