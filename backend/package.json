@@ -4,7 +4,7 @@
   "description": "",
   "main": "index",
   "scripts": {
-    "test": "jest",
+    "test": "jest server.test.js",
     "seed-test": "ts-node db/seeds/seed-test.ts",
     "start": "nodemon server.ts"
   },

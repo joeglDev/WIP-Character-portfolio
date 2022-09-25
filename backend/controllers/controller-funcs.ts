@@ -10,6 +10,7 @@ const postLogin = (req:any, res:any) => {
 
   const data = selectUser(username, password);
   console.log(data)
+  res.status(200).send("hello")
   } catch (error) {
     throw error;
   }

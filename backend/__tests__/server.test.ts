@@ -2,13 +2,17 @@
 //fail: {"username": "invalid", "password": "notPassword"}
 //pass: {"username": "test1", "password": "password"}
 
-
-
 const request = require("supertest");
 import app from "../server";
 
 describe("login", () => {
-    test("invalid login should return 404 and err body", () => {
-        return request(app).get("/login").expect(404)
-    });
-})
+  test("invalid login should return 404 and err body", () => {
+    return request(app)
+      .post("/login")
+      .send({ username: "invalid", password: "invalid" })
+      .expect(404)
+      .then((body: any) => {
+        console.log({body});
+      });
+  });
+});
