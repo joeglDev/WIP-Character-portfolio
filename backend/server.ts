@@ -1,6 +1,6 @@
 import express from "express";
-import postLogin from "./controllers/controller-funcs.js";
-import Endpoints from "./Endpoints.js";
+import postLogin from "./controllers/controller-funcs";
+import Endpoints from "./Endpoints";
 
 const app = express();
 const port = 9124;

@@ -1,7 +1,7 @@
 //note- production will need a seed with collections but no data
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
-import userData from "../data/test/users.js";
+import userData from "../data/test/users";
 
 // Connection URL
 let client:any;

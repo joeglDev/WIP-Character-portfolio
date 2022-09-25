@@ -1,4 +1,4 @@
-import selectUser from "../models/models-funcs.js";
+import selectUser from "../models/models-funcs";
 
 
 const postLogin = (req:any, res:any) => {

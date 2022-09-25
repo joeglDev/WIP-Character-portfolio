@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index",
   "scripts": {
-    "test": "jest server.test.js",
-    "seed-test": "node db/seeds/seed-test.js",
-    "start": "nodemon server.js"
+    "test": "jest server.test",
+    "seed-test": "node db/seeds/seed-test",
+    "start": "nodemon server"
   },
   "keywords": [],
   "author": "",
