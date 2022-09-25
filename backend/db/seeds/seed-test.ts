@@ -3,7 +3,6 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import userData from "../data/test/users.js";
 
-
 // Connection URL
 let client:any;
 const ENV = process.env.NODE_ENV || "test";
@@ -27,14 +26,9 @@ async function main() {
   //create collections
   const users = db.collection("users");
 
-  
-
   //insert users data
   const insertResult = await users.insertMany(userData);
-  console.log('Inserted documents =>', insertResult);
-  // test for fetch users
-  const findResult = await users.find({}).toArray();
-console.log('Found documents =>', findResult);
+  //console.log('Inserted documents =>', insertResult);
 
   return "done.";
 }
