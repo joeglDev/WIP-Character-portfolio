@@ -1,6 +1,7 @@
-const selectUsers = () => {
-console.log("hi from model")
+const selectUser = (username:string, password:string) => {
+
+console.log(username, password)
 return true
 };
 
-export default selectUsers;
+export default selectUser;
