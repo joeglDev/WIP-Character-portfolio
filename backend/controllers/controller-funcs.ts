@@ -1,14 +1,22 @@
-import selectUsers from "../models/models-funcs.js";
+import selectUser from "../models/models-funcs.js";
 
 
-const getLogin =  () => {
+const postLogin = (req:any, res:any) => {
   
-  const data = selectUsers();
+  try {
+    console.log(req.body)
+    const username = req.body.username;
+    const password = req.body.password;
+
+  const data = selectUser(username, password);
   console.log(data)
+  } catch (error) {
+    throw error;
+  }
 
    
     
 
 };
 
-export default getLogin;
+export default postLogin;

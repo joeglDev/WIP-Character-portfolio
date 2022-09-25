@@ -1,5 +1,5 @@
 class Endpoints  {
-    static getLogin:string = "/login";
+    static postLogin:string = "/login";
 };
 
 export default Endpoints;
