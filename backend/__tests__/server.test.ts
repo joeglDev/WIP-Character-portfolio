@@ -1,16 +1,20 @@
-
-
 const request = require("supertest");
+import seed from "../db/seeds/seed-test";
 import app from "../server";
 
+beforeEach(() => {
+  seed;
+});
+
 describe("login", () => {
-  test("invalid login should return 404 and err body", () => {
+  test("valid login should return 200 and username", () => {
     return request(app)
       .post("/login")
-      .send({ username: "invalid", password: "invalid" })
-      .expect(404)
-      .then((body: any) => {
-        console.log({body});
+      .send({ username: "test1", password: "password" })
+      .expect(200)
+      .then(({body}:any) => {
+        expect(body.found_user.username).toBe("test1")
       });
   });
 });
+

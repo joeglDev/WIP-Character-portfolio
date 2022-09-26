@@ -1,23 +1,17 @@
 import selectUser from "../models/models-funcs";
 
-
-const postLogin = (req:any, res:any) => {
-  
+const postLogin = async (req: any, res: any) => {
   try {
-    console.log(req.body)
     const username = req.body.username;
     const password = req.body.password;
 
-  const data = selectUser(username, password);
-  console.log(data)
-  res.status(200).send("hello")
+    const data = await selectUser(username, password);
+    const responseObject = { found_user : {username: data.username} };
+    console.log(responseObject)
+    res.status(200).send(responseObject);
   } catch (error) {
     throw error;
   }
-
-   
-    
-
 };
 
 export default postLogin;
