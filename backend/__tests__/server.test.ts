@@ -18,3 +18,7 @@ describe("login", () => {
   });
 });
 
+//bad case
+//refactor gets db from connection file
+//salting
+
