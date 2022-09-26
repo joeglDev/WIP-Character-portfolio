@@ -6,10 +6,12 @@ import userData from "../data/test/users";
 // Connection URL
 let client:any;
 const ENV = process.env.NODE_ENV || "test";
+console.log(ENV)
 dotenv.config();
 if (ENV === "test") {
 client = new MongoClient(`${process.env.MONGODB_URL}`);
 };
+
 
 //schemas
 import mongoose from "mongoose";
@@ -74,7 +76,6 @@ async function seed() {
   const filteredDocs = await users.find({}).toArray();
 //console.log('Found documents  =>', filteredDocs);
 
-await client.close()
 
   return "done.";
   
@@ -83,7 +84,7 @@ await client.close()
 seed()
   .then(console.log)
   .catch(console.error)
-  //.finally(() => client.close());
+  .finally(() => client.close());
 
   export default seed;
 
