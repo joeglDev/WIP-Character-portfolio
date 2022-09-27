@@ -84,7 +84,7 @@ async function seed() {
 seed()
   .then(console.log)
   .catch(console.error)
-  .finally(() => client.close());
+ // .finally(() => client.close());
 
   export default seed;
 

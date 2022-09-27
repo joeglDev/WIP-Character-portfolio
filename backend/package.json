@@ -4,8 +4,8 @@
   "description": "",
   "main": "index",
   "scripts": {
-    "test": "jest server.test.js",
-    "seed-test": "ts-node db/seeds/seed-test.ts",
+    "test": "tsc && jest server.test.js",
+    "seed-test": "tsc && ts-node db/seeds/seed-test.ts",
     "start": "nodemon server.ts"
   },
   "keywords": [],
