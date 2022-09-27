@@ -1,11 +1,12 @@
 const request = require("supertest");
-import seed from "../db/seeds/seed-test";
+import {seed} from "../db/seeds/seed-test";
 import app from "../server";
 
 
 beforeEach(() => {
   seed;
 });
+
 
 
 describe("login", () => {

@@ -1,4 +1,4 @@
-import { db } from "../db/seeds/seed-test";
+import { db } from "../db/connection";
 //this is the issue it has not run seed again each time so db undefined
 //may fix on extract out
 //this needs to be defined from a connection
