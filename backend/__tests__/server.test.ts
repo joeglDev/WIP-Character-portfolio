@@ -44,7 +44,7 @@ describe("login", () => {
 });
 
 
- //broken
+
 afterAll( () => {
 client.close()
 });

@@ -8,11 +8,11 @@ export let client: any;
 export let db: any;
 
 
-const ENV = process.env.NODE_ENV || "test";
+const ENV = process.env.NODE_ENV || "development";
 console.log("Environment: ", ENV);
 dotenv.config();
 
-if (ENV === "test") {
+if (ENV === "test" || ENV === "development") {
   client = new MongoClient(`${process.env.MONGODB_URL}`);
   // Database Name
   const dbName = "char-portfolio-test";
