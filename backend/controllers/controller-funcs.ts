@@ -1,23 +1,23 @@
 import selectUser from "../models/models-funcs";
 
-
-const postLogin = (req:any, res:any) => {
-  
+const postLogin = async (req: any, res: any) => {
   try {
-    console.log(req.body)
     const username = req.body.username;
     const password = req.body.password;
 
-  const data = selectUser(username, password);
-  console.log(data)
-  res.status(200).send("hello")
+    const data = await selectUser(username, password);
+    const responseObject = { login_response : {username: data.username, outcome: data.outcome} };
+    console.log(responseObject)
+    if (responseObject.login_response.outcome === "valid") {
+    res.status(200).send(responseObject);
+  } else if (responseObject.login_response.outcome === "invalid password") {
+    res.status(400).send(responseObject);
+  } else {
+    res.status(404).send(responseObject);
+  }
   } catch (error) {
     throw error;
   }
-
-   
-    
-
 };
 
 export default postLogin;

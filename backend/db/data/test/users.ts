@@ -15,7 +15,7 @@ const userData: userData[] = [
     },
     {username: "test3",
     password: "password",
-    }
+    },
 ];
 
 export default userData;
