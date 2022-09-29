@@ -26,7 +26,7 @@ const selectUser = async (username:string, password:string) => {
     else {
         throw new Error("unhandled login error")
     }
-    //console.log("model, foundUser")
+
     
 };
 

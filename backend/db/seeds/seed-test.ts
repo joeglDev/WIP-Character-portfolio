@@ -45,13 +45,14 @@ export async function seed() {
   let list = await db.listCollections().toArray();
   await list.forEach(async (data: any) => {
     if (data.name === "users") {
-      console.log("dropping");
+      console.log("Dropping collection: users");
       await db.dropCollection("users");
     }
   });
 
   //create collections
   const users = db.collection("users");
+  console.log("Created collection: users")
 
   //insert users data
   const insertResult = await users.insertMany(userData);
@@ -59,7 +60,7 @@ export async function seed() {
 
   const filteredDocs = await users.find({}).toArray();
   //console.log('Found documents  =>', filteredDocs);
- // await client.close()
+  //await client.close()
   //return "done.";
 };
 

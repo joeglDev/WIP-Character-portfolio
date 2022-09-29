@@ -9,8 +9,9 @@ export let db: any;
 
 
 const ENV = process.env.NODE_ENV || "test";
-console.log(ENV);
+console.log("Environment: ", ENV);
 dotenv.config();
+
 if (ENV === "test") {
   client = new MongoClient(`${process.env.MONGODB_URL}`);
   // Database Name
