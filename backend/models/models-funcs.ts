@@ -21,7 +21,7 @@ const selectUser = async (username:string, password:string) => {
         return foundUser
     } 
     // user valid / invalid password
-    else if (password !== userData[0].password) {
+    else if (bcrypt.compareSync(password, userData[0].password) === false) {
         return {username: userData[0].username, outcome: "invalid password"}
     } 
    
