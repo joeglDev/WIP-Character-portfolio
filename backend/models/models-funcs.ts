@@ -2,6 +2,8 @@ import { db } from "../db/connection";
 //this is the issue it has not run seed again each time so db undefined
 //may fix on extract out
 //this needs to be defined from a connection
+import bcrypt from "bcrypt";
+
 const users = db.collection("users");
 
 const selectUser = async (username:string, password:string) => {
@@ -14,7 +16,7 @@ const selectUser = async (username:string, password:string) => {
         return {username: "invalid_username", outcome: "user not found"}
     }
     // valid username and password
-    else if (password === userData[0].password) {
+    else if (bcrypt.compareSync(password, userData[0].password)) {
         const foundUser = {username: userData[0].username, outcome: "valid"};
         return foundUser
     } 
