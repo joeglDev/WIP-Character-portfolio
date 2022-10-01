@@ -13,7 +13,7 @@ describe("login", () => {
   test("valid login should return 200 and username for valid username and password", () => {
     return request(app)
       .post("/login")
-      .send({ username: "test1", password: "password" })
+      .send({ username: "test1", password: "password1" })
       .expect(200)
       .then(({ body }: any) => {
         expect(body.login_response.username).toBe("test1");

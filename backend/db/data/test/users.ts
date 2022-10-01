@@ -8,13 +8,13 @@ interface usersData extends Array<userData>{}
 
 const userData: userData[] = [
     {username: "test1",
-    password: "password",
+    password: "password1",
     },
     {username: "test2",
-    password: "password",
+    password: "password2",
     },
     {username: "test3",
-    password: "password",
+    password: "password3",
     },
 ];
 
