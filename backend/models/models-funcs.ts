@@ -9,7 +9,6 @@ const users = db.collection("users");
 const selectUser = async (username:string, password:string) => {
 
     const userData = await users.find({username: username}).toArray();
-    console.log("userdata", userData);
     
      //user not found
      if (userData.length === 0) {
@@ -24,7 +23,6 @@ const selectUser = async (username:string, password:string) => {
     else if (bcrypt.compareSync(password, userData[0].password) === false) {
         return {username: userData[0].username, outcome: "invalid password"}
     } 
-   
     else {
         throw new Error("unhandled login error")
     }

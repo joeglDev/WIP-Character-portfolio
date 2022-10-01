@@ -7,6 +7,7 @@ interface loginResponseObject {
 }
 
 const postLogin = async (req: Request, res: Response) => {
+  
   try {
     const username = req.body.username;
     const password = req.body.password;
@@ -15,7 +16,7 @@ const postLogin = async (req: Request, res: Response) => {
     const responseObject: loginResponseObject = {
       login_response: { username: data.username, outcome: data.outcome },
     };
-    console.log(responseObject);
+
     if (responseObject.login_response.outcome === "valid") {
       res.status(200).send(responseObject);
     } else if (responseObject.login_response.outcome === "invalid password") {
