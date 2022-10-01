@@ -1,7 +1,7 @@
 import { db, client } from "../connection";
 import userData from "../data/test/users";
 import bcrypt from "bcrypt";
-const saltRounds = 10; //move
+import { saltRounds } from "../../exports";
 
 export async function seed() {
 
