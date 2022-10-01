@@ -24,7 +24,8 @@ const postLogin = async (req: Request, res: Response) => {
       res.status(404).send(responseObject);
     }
   } catch (error) {
-    throw error;
+    //move into err 500 next error handler if needed
+    console.log(error)
   }
 };
 

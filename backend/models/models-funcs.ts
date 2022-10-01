@@ -28,8 +28,6 @@ const selectUser = async (username:string, password:string) => {
     else {
         throw new Error("unhandled login error")
     }
-
-    
 };
 
 export default selectUser;
