@@ -1,5 +1,6 @@
 class Endpoints  {
-    static postLogin:string = "/login";
+    static login:string = "/login";
+    static register:string = "/register"
 };
 
 export default Endpoints;
