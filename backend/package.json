@@ -6,7 +6,8 @@
   "scripts": {
     "test": "tsc && jest server.test.js",
     "seed-test": "tsc && ts-node db/seeds/seed-test.ts",
-    "start": "nodemon server.ts"
+    "start": "nodemon server.ts",
+    "seedandtest": "npm run seed-test && npm run test"
   },
   "keywords": [],
   "author": "",
