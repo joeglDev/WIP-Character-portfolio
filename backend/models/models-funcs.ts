@@ -31,9 +31,18 @@ export const createNewUser = async (
   newUsername: string,
   newPassword: string
 ) => {
-  try {
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hashedPassword = bcrypt.hashSync(newPassword, salt);
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+  //query db for existing username-> throw err if duplicate
+  const foundUsername = await users.find({ username: newUsername }).toArray();
+  if (foundUsername.length != 0) {
+    return Promise.reject({
+      username: newUsername,
+      msg: "400-duplicate username",
+    });
+  } else {
+    //valid new user
     const newUser = await users.insertOne({
       username: newUsername,
       password: hashedPassword,
@@ -45,10 +54,11 @@ export const createNewUser = async (
       };
       return validServerResponse;
     } else {
-      const invalidServerResponse = { msg: "Registation not successful." };
+      const invalidServerResponse = {
+        username: newUsername,
+        msg: "Registation not successful.",
+      };
       return invalidServerResponse;
     }
-  } catch (err) {
-    throw new Error("unhandled registation error");
   }
 };

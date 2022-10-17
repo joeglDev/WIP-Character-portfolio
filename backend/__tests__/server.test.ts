@@ -45,27 +45,36 @@ describe("login", () => {
 });
 
 describe("registration", () => {
+  // valid -> returns username and success message
   test("returns appropriate res body and status 201 if login successful", () => {
     return request(app)
-    .post(Endpoints.register)
-    .send({username: "hiroji", password: "12345"})
-    .expect(201)
-    .then(({ body }: any) => {
-      expect(body.registration_response).toEqual({username: "hiroji", msg: "Registation successful."})
-    });
-  })
-  // valid -> returns username and success message
- 
-  // 
+      .post(Endpoints.register)
+      .send({ username: "hiroji", password: "12345" })
+      .expect(201)
+      .then(({ body }: any) => {
+        expect(body.registration_response).toEqual({
+          username: "hiroji",
+          msg: "Registation successful.",
+        });
+      });
+  });
   // password OR username exists
-
-
+  test("returns appropriate res body and status 400 if login unsuccessful due to same username", () => {
+    return request(app)
+      .post(Endpoints.register)
+      .send({ username: "test1", password: "newPassword" })
+      .expect(400)
+      .then(({ body }: any) => {
+        expect(body.registration_response).toEqual({
+          username: "test1",
+          msg: "400-duplicate username",
+        });
+      });
+  });
 });
 
-
-
-afterAll( () => {
-client.close()
+afterAll(() => {
+  client.close();
 });
 
 //hashing

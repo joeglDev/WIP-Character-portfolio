@@ -5,6 +5,9 @@ import { Request, Response } from "express";
 interface loginResponseObject {
   login_response: { username: string; outcome: string };
 }
+interface registationResponseObject {
+  registration_response: { username: string; msg: string };
+}
 
 export const postLogin = async (req: Request, res: Response) => {
   try {
@@ -35,9 +38,14 @@ export const postNewUser = async (req: Request, res: Response) => {
     const newPassword: string = req.body.password;
 
     const serverResponse = await createNewUser(newUsername, newPassword);
-    const responseObject = { registration_response: serverResponse };
+    const responseObject: registationResponseObject = {
+      registration_response: serverResponse,
+    };
     if (serverResponse.msg === "Registation successful.") {
       res.status(201).send(responseObject);
-    }
-  } catch (err) {}
+    } 
+  } catch (err) {
+    const errorResponse = {registration_response: err};
+    res.status(400).send(errorResponse)
+  }
 };
