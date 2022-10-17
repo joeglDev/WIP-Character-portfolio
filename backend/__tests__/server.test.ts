@@ -65,9 +65,10 @@ describe("registration", () => {
       .send({ username: "test1", password: "newPassword" })
       .expect(400)
       .then(({ body }: any) => {
-        expect(body.registration_response).toEqual({
+        expect(body).toEqual({
           username: "test1",
           msg: "400-duplicate username",
+          status: 400
         });
       });
   });

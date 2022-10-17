@@ -36,7 +36,7 @@ export async function seed() {
 
   const filteredDocs = await users.find({}).toArray();
   console.log('Found documents  =>', filteredDocs);
-  //await client.close()
+  await client.close()
   //return "done.";
 
   /*

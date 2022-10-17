@@ -1,5 +1,6 @@
 import { createNewUser, selectUser } from "../models/models-funcs";
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
+import { nextTick } from "process";
 
 //objects
 interface loginResponseObject {
@@ -19,6 +20,7 @@ export const postLogin = async (req: Request, res: Response) => {
       login_response: { username: data.username, outcome: data.outcome },
     };
 
+      // errors handled here not in errors.ts as database returns nothing is expected if wrong username or password
     if (responseObject.login_response.outcome === "valid") {
       res.status(200).send(responseObject);
     } else if (responseObject.login_response.outcome === "invalid password") {
@@ -32,7 +34,11 @@ export const postLogin = async (req: Request, res: Response) => {
   }
 };
 
-export const postNewUser = async (req: Request, res: Response) => {
+export const postNewUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const newUsername: string = req.body.username;
     const newPassword: string = req.body.password;
@@ -43,9 +49,8 @@ export const postNewUser = async (req: Request, res: Response) => {
     };
     if (serverResponse.msg === "Registation successful.") {
       res.status(201).send(responseObject);
-    } 
+    }
   } catch (err) {
-    const errorResponse = {registration_response: err};
-    res.status(400).send(errorResponse)
+    next(err);
   }
 };
