@@ -1,6 +1,6 @@
 //import express = require("express");
 import express from "express";
-import postLogin from "./controllers/controller-funcs";
+import {postLogin, postNewUser} from "./controllers/controller-funcs";
 import Endpoints from "./Endpoints";
 
 const app = express();
@@ -10,7 +10,8 @@ const port = 9124;
 app.use(express.json());
 
 //paths
-app.post(Endpoints.postLogin, postLogin)
+app.post(Endpoints.login, postLogin);
+app.post(Endpoints.register, postNewUser)
 
 //listen
 app.listen(port, () => {

@@ -1,4 +1,4 @@
-import selectUser from "../models/models-funcs";
+import { createNewUser, selectUser } from "../models/models-funcs";
 import { Request, Response } from "express";
 
 //objects
@@ -6,11 +6,10 @@ interface loginResponseObject {
   login_response: { username: string; outcome: string };
 }
 
-const postLogin = async (req: Request, res: Response) => {
-  
+export const postLogin = async (req: Request, res: Response) => {
   try {
-    const username = req.body.username;
-    const password = req.body.password;
+    const username: string = req.body.username;
+    const password: string = req.body.password;
 
     const data = await selectUser(username, password);
     const responseObject: loginResponseObject = {
@@ -26,8 +25,19 @@ const postLogin = async (req: Request, res: Response) => {
     }
   } catch (error) {
     //move into err 500 next error handler if needed
-    console.log(error)
+    console.log(error);
   }
 };
 
-export default postLogin;
+export const postNewUser = async (req: Request, res: Response) => {
+  try {
+    const newUsername: string = req.body.username;
+    const newPassword: string = req.body.password;
+
+    const serverResponse = await createNewUser(newUsername, newPassword);
+    const responseObject = { registration_response: serverResponse };
+    if (serverResponse.msg === "Registation successful.") {
+      res.status(201).send(responseObject);
+    }
+  } catch (err) {}
+};
