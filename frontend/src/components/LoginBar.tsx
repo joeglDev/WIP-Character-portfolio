@@ -1,6 +1,7 @@
 import React from "react";
 import "../App.css";
 import { useState } from "react";
+import { loginModel } from "../models/API_calls";
 
 const LoginBar = () => {
   const [username, setUsername] = useState("");
@@ -15,9 +16,11 @@ const LoginBar = () => {
     setPassword(target.value);
   };
 
-  const handleLogin = (event: React.MouseEvent<HTMLElement>) => {
+  const handleLogin = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    console.log("clicked");
+    console.log("clicked login");
+     await loginModel(username, password);
+
   };
 
   return (
