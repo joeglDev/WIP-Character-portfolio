@@ -27,7 +27,16 @@ margin-right: 0.5rem;
 .login_button {
  border: none;
  background-color: white;
+}
 
+.login_item_valid {
+  border-color: green;
+  border-width: 0.4rem;
+}
+
+.login_item_invalid {
+  border-color: red;
+  border-width: 0.4rem;
 }
 
 .login_button:hover {

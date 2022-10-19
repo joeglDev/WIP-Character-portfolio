@@ -1,11 +1,14 @@
 import React from "react";
 import "../App.css";
 import { useState } from "react";
-import { loginModel } from "../models/API_calls";
+import { loginModel, registrationModel } from "../models/API_calls";
 
 const LoginBar = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  //user feedback className modifiers
+  const [isUsernameValid, setIsUsernameValid] = useState("");
+  const [isPasswordValid, setIsPasswordValid] = useState("");
 
   const changeUsername = (event: React.ChangeEvent) => {
     const target = event.target as HTMLTextAreaElement;
@@ -18,9 +21,53 @@ const LoginBar = () => {
 
   const handleLogin = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    console.log("clicked login");
-     await loginModel(username, password);
+    const loginResponse = await loginModel(username, password);
+    console.log(loginResponse.login_response);
 
+    //adjust CSS to highlight incorrect inputs
+    if (username === "") {
+      setIsUsernameValid("");
+    } else if (loginResponse.login_response.outcome === "user not found") {
+      setIsUsernameValid("invalid");
+    } else {
+      setIsUsernameValid("valid");
+    }
+    if (password === "") {
+      setIsPasswordValid("");
+    } else if (loginResponse.login_response.outcome === "invalid password") {
+      setIsPasswordValid("invalid");
+    } else {
+      setIsPasswordValid("valid");
+    }
+    //take obj and insert into theme provider
+  };
+
+  const handleRegistation = async (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    const registrationResponse = await registrationModel(username, password);
+    console.log(registrationResponse);
+
+    //adjust CSS to highlight incorrect inputs
+    if (username === "") {
+      setIsUsernameValid("");
+    } else if (
+      registrationResponse.msg === "400-duplicate username" ||
+      registrationResponse.msg === "400-missing requirement"
+    ) {
+      setIsUsernameValid("invalid");
+    } else {
+      setIsUsernameValid("valid");
+    }
+    if (password === "") {
+      setIsPasswordValid("");
+    } else if (registrationResponse.msg === "400-missing requirement") {
+      setIsPasswordValid("invalid");
+    } else {
+      setIsPasswordValid("valid");
+    }
+
+    //take obj and insert into theme provider
+    // flash up registration successful
   };
 
   return (
@@ -30,7 +77,14 @@ const LoginBar = () => {
           Username:{" "}
         </label>
         <input
-          className="login_item"
+          className={
+            "login_item " +
+            (isUsernameValid === ""
+              ? ""
+              : isUsernameValid === "valid"
+              ? "login_item_valid"
+              : "login_item_invalid")
+          }
           id="usernameInput"
           type="text"
           onChange={changeUsername}
@@ -39,13 +93,23 @@ const LoginBar = () => {
           Password:{" "}
         </label>
         <input
-          className="login_item"
+          className={
+            "login_item " +
+            (isUsernameValid === ""
+              ? ""
+              : isPasswordValid === "valid"
+              ? "login_item_valid"
+              : "login_item_invalid")
+          }
           id="passwordInput"
           type="text"
           onChange={changePassword}
         ></input>
         <button className="login_item login_button" onClick={handleLogin}>
           Login
+        </button>
+        <button className="login_item login_button" onClick={handleRegistation}>
+          Register
         </button>
       </form>
     </header>
