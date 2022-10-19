@@ -43,3 +43,11 @@ margin-right: 0.5rem;
   background-color: rgb(230, 172, 64);
 }
 
+.visible {
+display: inline-block;
+}
+
+.not_visible {
+  display: none;
+}
+

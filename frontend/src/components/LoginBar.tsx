@@ -9,6 +9,7 @@ const LoginBar = () => {
   //user feedback className modifiers
   const [isUsernameValid, setIsUsernameValid] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState("");
+  const [warning, setWarning] = useState(false);
 
   const changeUsername = (event: React.ChangeEvent) => {
     const target = event.target as HTMLTextAreaElement;
@@ -44,6 +45,15 @@ const LoginBar = () => {
 
   const handleRegistation = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
+    if (/\s/.test(username) || /\s/.test(username) || username.length === 0 || password.length === 0) {
+      console.log("Username or password cannot contain whitespace");
+      setIsUsernameValid("invalid");
+      setIsPasswordValid("invalid");
+      setWarning(true);
+      return (<p>Username or password cannot be empty or contain whitespace.</p>)
+    } else {
+      setWarning(false);
+    }
     const registrationResponse = await registrationModel(username, password);
     console.log(registrationResponse);
 
@@ -71,6 +81,7 @@ const LoginBar = () => {
   };
 
   return (
+    <>
     <header className="header_auth">
       <form className="header_form">
         <label className="login_item" htmlFor="username">
@@ -113,6 +124,11 @@ const LoginBar = () => {
         </button>
       </form>
     </header>
+
+    <div className={warning ? "visible": "not_visible"}>
+     <p> Username or password cannot be empty or contain whitespace. </p>
+    </div>
+    </>
   );
 };
 
