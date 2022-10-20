@@ -1,9 +1,22 @@
 import React from "react";
 import "../App.css";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { UserContext } from "../App";
 import { loginModel, registrationModel } from "../models/API_calls";
 
 const LoginBar = () => {
+  //grab context
+  const context = useContext(UserContext);
+  const user = context.user;
+  const setUser = context.setUser;
+
+  //updates on change in Context.user
+  useEffect(() => {
+console.log("currentUser is", user)
+  });
+ 
+ 
+  //console.log("context", user)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   //user feedback className modifiers
@@ -46,8 +59,10 @@ const LoginBar = () => {
     } else {
       setIsPasswordValid("valid");
       setPasswordWarning(false);
-    }
-    //take obj and insert into theme provider
+    };
+
+    //on successful login set Context.user = username
+    if (loginResponse.login_response.outcome === "valid") {setUser(loginResponse.login_response.username)};
   };
 
   const handleRegistation = async (event: React.MouseEvent<HTMLElement>) => {
@@ -67,7 +82,6 @@ const LoginBar = () => {
       setWarning(false);
     }
     const registrationResponse = await registrationModel(username, password);
-    console.log(registrationResponse);
 
     //adjust CSS to highlight incorrect inputs
     if (username === "") {
@@ -101,6 +115,7 @@ const LoginBar = () => {
         "Registation successful."
       ) {
         setRegistrationSuccessful(true);
+        setUser(registrationResponse.registration_response.username);
       }
     } catch (err) {
       console.log(err);
@@ -113,6 +128,7 @@ const LoginBar = () => {
   return (
     <>
       <header className="header_auth">
+      <p>{user}</p>
         <form className="header_form">
           <label className="login_item" htmlFor="username">
             Username:{" "}
