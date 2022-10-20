@@ -10,6 +10,7 @@ const LoginBar = () => {
   const [isUsernameValid, setIsUsernameValid] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState("");
   const [warning, setWarning] = useState(false);
+  const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
 
   const changeUsername = (event: React.ChangeEvent) => {
     const target = event.target as HTMLTextAreaElement;
@@ -45,12 +46,17 @@ const LoginBar = () => {
 
   const handleRegistation = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    if (/\s/.test(username) || /\s/.test(username) || username.length === 0 || password.length === 0) {
+    if (
+      /\s/.test(username) ||
+      /\s/.test(username) ||
+      username.length === 0 ||
+      password.length === 0
+    ) {
       console.log("Username or password cannot contain whitespace");
       setIsUsernameValid("invalid");
       setIsPasswordValid("invalid");
       setWarning(true);
-      return (<p>Username or password cannot be empty or contain whitespace.</p>)
+      return <p>Username or password cannot be empty or contain whitespace.</p>;
     } else {
       setWarning(false);
     }
@@ -65,6 +71,7 @@ const LoginBar = () => {
       registrationResponse.msg === "400-missing requirement"
     ) {
       setIsUsernameValid("invalid");
+      setRegistrationSuccessful(false);
     } else {
       setIsUsernameValid("valid");
     }
@@ -72,8 +79,21 @@ const LoginBar = () => {
       setIsPasswordValid("");
     } else if (registrationResponse.msg === "400-missing requirement") {
       setIsPasswordValid("invalid");
+      setRegistrationSuccessful(false);
     } else {
       setIsPasswordValid("valid");
+    }
+
+    //may need to go back to server and align err and successful response objects
+    try {
+      if (
+        registrationResponse.registration_response.msg ===
+        "Registation successful."
+      ) {
+        setRegistrationSuccessful(true);
+      }
+    } catch (err) {
+      console.log(err);
     }
 
     //take obj and insert into theme provider
@@ -82,52 +102,60 @@ const LoginBar = () => {
 
   return (
     <>
-    <header className="header_auth">
-      <form className="header_form">
-        <label className="login_item" htmlFor="username">
-          Username:{" "}
-        </label>
-        <input
-          className={
-            "login_item " +
-            (isUsernameValid === ""
-              ? ""
-              : isUsernameValid === "valid"
-              ? "login_item_valid"
-              : "login_item_invalid")
-          }
-          id="usernameInput"
-          type="text"
-          onChange={changeUsername}
-        ></input>
-        <label className="login_item" htmlFor="password">
-          Password:{" "}
-        </label>
-        <input
-          className={
-            "login_item " +
-            (isUsernameValid === ""
-              ? ""
-              : isPasswordValid === "valid"
-              ? "login_item_valid"
-              : "login_item_invalid")
-          }
-          id="passwordInput"
-          type="text"
-          onChange={changePassword}
-        ></input>
-        <button className="login_item login_button" onClick={handleLogin}>
-          Login
-        </button>
-        <button className="login_item login_button" onClick={handleRegistation}>
-          Register
-        </button>
-      </form>
-    </header>
+      <header className="header_auth">
+        <form className="header_form">
+          <label className="login_item" htmlFor="username">
+            Username:{" "}
+          </label>
+          <input
+            className={
+              "login_item " +
+              (isUsernameValid === ""
+                ? ""
+                : isUsernameValid === "valid"
+                ? "login_item_valid"
+                : "login_item_invalid")
+            }
+            id="usernameInput"
+            type="text"
+            onChange={changeUsername}
+          ></input>
+          <label className="login_item" htmlFor="password">
+            Password:{" "}
+          </label>
+          <input
+            className={
+              "login_item " +
+              (isUsernameValid === ""
+                ? ""
+                : isPasswordValid === "valid"
+                ? "login_item_valid"
+                : "login_item_invalid")
+            }
+            id="passwordInput"
+            type="text"
+            onChange={changePassword}
+          ></input>
+          <button className="login_item login_button" onClick={handleLogin}>
+            Login
+          </button>
+          <button
+            className="login_item login_button"
+            onClick={handleRegistation}
+          >
+            Register
+          </button>
+        </form>
+      </header>
 
-    <div className={warning ? "visible": "not_visible"}>
-     <p> Username or password cannot be empty or contain whitespace. </p>
-    </div>
+      <div className="alert">
+        <p className={warning ? "visible" : "not_visible"}>
+          Username or password cannot be empty or contain whitespace.
+        </p>
+        <p className={registrationSuccessful ? "visible" : "not_visible"}>
+          User registration successful.
+        </p>
+      </div>
     </>
   );
 };
