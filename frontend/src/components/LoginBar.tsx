@@ -12,10 +12,9 @@ const LoginBar = () => {
 
   //updates on change in Context.user
   useEffect(() => {
-console.log("currentUser is", user)
+    console.log("currentUser is", user);
   });
- 
- 
+
   //console.log("context", user)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -59,10 +58,12 @@ console.log("currentUser is", user)
     } else {
       setIsPasswordValid("valid");
       setPasswordWarning(false);
-    };
+    }
 
     //on successful login set Context.user = username
-    if (loginResponse.login_response.outcome === "valid") {setUser(loginResponse.login_response.username)};
+    if (loginResponse.login_response.outcome === "valid") {
+      setUser(loginResponse.login_response.username);
+    }
   };
 
   const handleRegistation = async (event: React.MouseEvent<HTMLElement>) => {
@@ -128,8 +129,8 @@ console.log("currentUser is", user)
   return (
     <>
       <header className="header_auth">
-      <p>{user}</p>
         <form className="header_form">
+        <p className="current_user">{user}</p>
           <label className="login_item" htmlFor="username">
             Username:{" "}
           </label>
