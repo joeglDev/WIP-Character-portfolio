@@ -10,5 +10,4 @@ export const handleCustomErrors = (
     const errorResponse = { status: 400, username: err.username, msg: err.msg };
     res.status(400).send(errorResponse);
   }
-  console.log(err);
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../App";
 import { loginModel, registrationModel } from "../models/API_calls";
 
@@ -10,12 +10,7 @@ const LoginBar = () => {
   const user = context.user;
   const setUser = context.setUser;
 
-  //updates on change in Context.user
-  useEffect(() => {
-    console.log("currentUser is", user);
-  });
-
-  //console.log("context", user)
+  //assign component's states
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   //user feedback className modifiers
@@ -23,9 +18,8 @@ const LoginBar = () => {
   const [isPasswordValid, setIsPasswordValid] = useState("");
   const [warning, setWarning] = useState(false);
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
-  const [usernameWarning, setUsernameWarning] = useState(false);
-  const [passwordWarning, setPasswordWarning] = useState(false);
 
+  //change input field states
   const changeUsername = (event: React.ChangeEvent) => {
     const target = event.target as HTMLTextAreaElement;
     setUsername(target.value);
@@ -38,26 +32,21 @@ const LoginBar = () => {
   const handleLogin = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     const loginResponse = await loginModel(username, password);
-    console.log(loginResponse.login_response);
 
     //adjust CSS to highlight incorrect inputs
     if (username === "") {
       setIsUsernameValid("");
     } else if (loginResponse.login_response.outcome === "user not found") {
       setIsUsernameValid("invalid");
-      setUsernameWarning(true);
     } else {
       setIsUsernameValid("valid");
-      setUsernameWarning(false);
     }
     if (password === "") {
       setIsPasswordValid("");
     } else if (loginResponse.login_response.outcome === "invalid password") {
       setIsPasswordValid("invalid");
-      setPasswordWarning(true);
     } else {
       setIsPasswordValid("valid");
-      setPasswordWarning(false);
     }
 
     //on successful login set Context.user = username
@@ -68,13 +57,14 @@ const LoginBar = () => {
 
   const handleRegistation = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
+
+    //prevent submission of empty strings to registration
     if (
       /\s/.test(username) ||
-      /\s/.test(username) ||
+      /\s/.test(password) ||
       username.length === 0 ||
       password.length === 0
     ) {
-      console.log("Username or password cannot contain whitespace");
       setIsUsernameValid("invalid");
       setIsPasswordValid("invalid");
       setWarning(true);
@@ -92,21 +82,17 @@ const LoginBar = () => {
       registrationResponse.msg === "400-missing requirement"
     ) {
       setIsUsernameValid("invalid");
-      setUsernameWarning(true);
       setRegistrationSuccessful(false);
     } else {
       setIsUsernameValid("valid");
-      setUsernameWarning(false);
     }
     if (password === "") {
       setIsPasswordValid("");
     } else if (registrationResponse.msg === "400-missing requirement") {
       setIsPasswordValid("invalid");
-      setPasswordWarning(true);
       setRegistrationSuccessful(false);
     } else {
       setIsPasswordValid("valid");
-      setPasswordWarning(false);
     }
 
     //may need to go back to server and align err and successful response objects
@@ -121,16 +107,13 @@ const LoginBar = () => {
     } catch (err) {
       console.log(err);
     }
-
-    //take obj and insert into theme provider
-    // flash up registration successful
   };
 
   return (
     <>
       <header className="header_auth">
         <form className="header_form">
-        <p className="current_user">{user}</p>
+          <p className="current_user">{user}</p>
           <label className="login_item" htmlFor="username">
             Username:{" "}
           </label>
@@ -160,7 +143,7 @@ const LoginBar = () => {
                 : "login_item_invalid")
             }
             id="passwordInput"
-            type="text"
+            type="password"
             onChange={changePassword}
           ></input>
           <button className="login_item login_button" onClick={handleLogin}>
@@ -182,10 +165,22 @@ const LoginBar = () => {
         <p className={registrationSuccessful ? "visible" : "not_visible"}>
           User registration successful.
         </p>
-        <p className={usernameWarning ? "visible" : "not_visible"}>
+        <p
+          className={
+            isUsernameValid !== "valid" && isUsernameValid !== ""
+              ? "visible"
+              : "not_visible"
+          }
+        >
           Please select another username.
         </p>
-        <p className={passwordWarning ? "visible" : "not_visible"}>
+        <p
+          className={
+            isPasswordValid !== "valid" && isPasswordValid !== ""
+              ? "visible"
+              : "not_visible"
+          }
+        >
           Password is incorrect. Please input another password.
         </p>
       </div>
