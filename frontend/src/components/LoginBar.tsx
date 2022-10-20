@@ -11,6 +11,8 @@ const LoginBar = () => {
   const [isPasswordValid, setIsPasswordValid] = useState("");
   const [warning, setWarning] = useState(false);
   const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
+  const [usernameWarning, setUsernameWarning] = useState(false);
+  const [passwordWarning, setPasswordWarning] = useState(false);
 
   const changeUsername = (event: React.ChangeEvent) => {
     const target = event.target as HTMLTextAreaElement;
@@ -31,15 +33,19 @@ const LoginBar = () => {
       setIsUsernameValid("");
     } else if (loginResponse.login_response.outcome === "user not found") {
       setIsUsernameValid("invalid");
+      setUsernameWarning(true);
     } else {
       setIsUsernameValid("valid");
+      setUsernameWarning(false);
     }
     if (password === "") {
       setIsPasswordValid("");
     } else if (loginResponse.login_response.outcome === "invalid password") {
       setIsPasswordValid("invalid");
+      setPasswordWarning(true);
     } else {
       setIsPasswordValid("valid");
+      setPasswordWarning(false);
     }
     //take obj and insert into theme provider
   };
@@ -71,17 +77,21 @@ const LoginBar = () => {
       registrationResponse.msg === "400-missing requirement"
     ) {
       setIsUsernameValid("invalid");
+      setUsernameWarning(true);
       setRegistrationSuccessful(false);
     } else {
       setIsUsernameValid("valid");
+      setUsernameWarning(false);
     }
     if (password === "") {
       setIsPasswordValid("");
     } else if (registrationResponse.msg === "400-missing requirement") {
       setIsPasswordValid("invalid");
+      setPasswordWarning(true);
       setRegistrationSuccessful(false);
     } else {
       setIsPasswordValid("valid");
+      setPasswordWarning(false);
     }
 
     //may need to go back to server and align err and successful response objects
@@ -154,6 +164,12 @@ const LoginBar = () => {
         </p>
         <p className={registrationSuccessful ? "visible" : "not_visible"}>
           User registration successful.
+        </p>
+        <p className={usernameWarning ? "visible" : "not_visible"}>
+          Please select another username.
+        </p>
+        <p className={passwordWarning ? "visible" : "not_visible"}>
+          Password is incorrect. Please input another password.
         </p>
       </div>
     </>
