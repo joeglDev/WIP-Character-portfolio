@@ -10,7 +10,9 @@ A personal project to display user generated fictional characters in an aestheti
 
 ## Hosted version:
 
-- Work in progress
+### MongoDB client connection
+
+The connection string for mongoDB is stored in a .env file under `MONGODB_URL=<connection string>`. PLease report any database errors to [joegilbertdev](https://github.com/joeglDev).
 
 ## To run locally:
 
@@ -23,4 +25,4 @@ A personal project to display user generated fictional characters in an aestheti
 ## Acknowledgements
 
 Special thanks to the following for their aid:
-- [Nanashi](https://github.com/Mitame) / Mitame Mitame 
+- [Nanashi](https://github.com/Mitame) / Nanashi Mitame 
