@@ -11,3 +11,10 @@ export const handleCustomErrors = (
     res.status(400).send(errorResponse);
   }
 };
+
+export const handleInvalidPaths = (req: Request, res: Response) => {
+  const reponseBody = {
+    invalid_request: { status: 404, msg: "404-invalid endpoint" },
+  };
+  res.status(404).send(reponseBody);
+};

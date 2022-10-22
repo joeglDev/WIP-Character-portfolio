@@ -68,7 +68,21 @@ describe("registration", () => {
         expect(body).toEqual({
           username: "test1",
           msg: "400-duplicate username",
-          status: 400
+          status: 400,
+        });
+      });
+  });
+});
+
+describe("invalid API endpoints", () => {
+  test("invalid API endpoint returns http status 404 and msg", () => {
+    return request(app)
+      .get("/invalid")
+      .expect(404)
+      .then(({ body }: any) => {
+        expect(body.invalid_request).toEqual({
+          status: 404,
+          msg: "404-invalid endpoint",
         });
       });
   });
