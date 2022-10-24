@@ -5,7 +5,7 @@ import {
   selectUserCharacters,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
-import { nextTick } from "process";
+
 
 //objects
 interface loginResponseObject {

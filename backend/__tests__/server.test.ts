@@ -3,7 +3,7 @@ import { client } from "../db/connection";
 import { seed } from "../db/seeds/seed-test";
 import app from "../server";
 import Endpoints from "../Endpoints";
-import charsData from "../db/data/test/chars";
+
 
 /*
 beforeAll(() => {
@@ -117,30 +117,31 @@ describe("get char data", () => {
   });
 
   test("get a specific users characters by username", () => {
-    return request(app).get("/characters/test1")
-    .expect(200)
-    .then(({body}:any) => {
-      expect(body.user_characters.length).toBe(2)
-      body.user_characters.forEach((char: any) => {
-        expect(char).toEqual(
-          expect.objectContaining({
-            _id: expect.any(String),
-            age: expect.any(String),
-            allignment: expect.any(String),
-            gender: expect.any(String),
-            sexuality: expect.any(String),
-            height: expect.any(String),
-            weight: expect.any(String),
-            imgURL: expect.any(String),
-            species: expect.any(String),
-            name: expect.any(String),
-            ownerUsername: expect.any(String),
-            bio: expect.any(String),
-          })
-        );
+    return request(app)
+      .get("/characters/test1")
+      .expect(200)
+      .then(({ body }: any) => {
+        expect(body.user_characters.length).toBe(2);
+        body.user_characters.forEach((char: any) => {
+          expect(char).toEqual(
+            expect.objectContaining({
+              _id: expect.any(String),
+              age: expect.any(String),
+              allignment: expect.any(String),
+              gender: expect.any(String),
+              sexuality: expect.any(String),
+              height: expect.any(String),
+              weight: expect.any(String),
+              imgURL: expect.any(String),
+              species: expect.any(String),
+              name: expect.any(String),
+              ownerUsername: expect.any(String),
+              bio: expect.any(String),
+            })
+          );
+        });
       });
-    })
-  })
+  });
 });
 
 afterAll(() => {
