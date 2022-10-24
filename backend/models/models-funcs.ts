@@ -69,3 +69,8 @@ export const selectAllCharacters = async () => {
   const charData = await chars.find({}).toArray();
   return charData
 };
+
+export const selectUserCharacters = async (username: string) => {
+  const charData = await chars.find({ownerUsername: username}).toArray();
+  return charData
+};

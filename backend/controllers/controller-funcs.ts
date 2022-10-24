@@ -2,6 +2,7 @@ import {
   createNewUser,
   selectAllCharacters,
   selectUser,
+  selectUserCharacters,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
 import { nextTick } from "process";
@@ -63,6 +64,17 @@ export const getAllChars = async (req: Request, res: Response) => {
   try {
     const charData = await selectAllCharacters();
     const responseBody = { characters: charData };
+    res.status(200).send(responseBody);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getUserChars = async (req: Request, res: Response) => {
+  try {
+    const username = req.params.username;
+    const charData = await selectUserCharacters(username);
+    const responseBody = { user_characters: charData };
     res.status(200).send(responseBody);
   } catch (err) {
     console.log(err);
