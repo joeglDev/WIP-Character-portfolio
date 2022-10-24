@@ -2,6 +2,7 @@ import { db, client } from "../connection";
 import userData from "../data/test/users";
 import bcrypt from "bcrypt";
 import { saltRounds } from "../../exports";
+import charsData from "../data/test/chars";
 
 export async function seed() {
 
@@ -23,18 +24,26 @@ export async function seed() {
     if (data.name === "users") {
       console.log("Dropping collection: users");
       await db.dropCollection("users");
+    } else if (data.name === "chars") {
+      console.log("Dropping collection: chars");
+      await db.dropCollection("chars");
     }
   });
 
   //create collections
   const users = db.collection("users");
+  const chars = db.collection("chars")
   console.log("Created collection: users");
+  console.log("Created collection: chars");
 
-  //insert users data
-  const insertResult = await users.insertMany(hashedUserData);
-  console.log('Inserted documents =>', insertResult);
+  //insert data
+  const insertUsers = await users.insertMany(hashedUserData);
+  console.log('Inserted documents =>', insertUsers);
 
-  const filteredDocs = await users.find({}).toArray();
+  const insertChars = await chars.insertMany(charsData);
+  console.log('Inserted documents =>', insertChars);
+
+  const filteredDocs = await chars.find({}).toArray();
   console.log('Found documents  =>', filteredDocs);
   await client.close()
 };
