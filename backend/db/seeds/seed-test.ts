@@ -37,12 +37,6 @@ export async function seed() {
   const filteredDocs = await users.find({}).toArray();
   console.log('Found documents  =>', filteredDocs);
   await client.close()
-  //return "done.";
-
-  /*
-  const test = bcrypt.compareSync("passwor",filteredDocs[0].password);
-  console.log(test)
-  */
 };
 
 seed();
