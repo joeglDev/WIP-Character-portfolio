@@ -1,4 +1,8 @@
-import { createNewUser, selectUser } from "../models/models-funcs";
+import {
+  createNewUser,
+  selectAllCharacters,
+  selectUser,
+} from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
 import { nextTick } from "process";
 
@@ -20,7 +24,7 @@ export const postLogin = async (req: Request, res: Response) => {
       login_response: { username: data.username, outcome: data.outcome },
     };
 
-      // errors handled here not in errors.ts as database returns nothing is expected if wrong username or password
+    // errors handled here not in errors.ts as database returns nothing is expected if wrong username or password
     if (responseObject.login_response.outcome === "valid") {
       res.status(200).send(responseObject);
     } else if (responseObject.login_response.outcome === "invalid password") {
@@ -52,5 +56,15 @@ export const postNewUser = async (
     }
   } catch (err) {
     next(err);
+  }
+};
+
+export const getAllChars = async (req: Request, res: Response) => {
+  try {
+    const charData = await selectAllCharacters();
+    const responseBody = { characters: charData };
+    res.status(200).send(responseBody);
+  } catch (err) {
+    console.log(err);
   }
 };

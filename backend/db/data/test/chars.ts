@@ -9,6 +9,7 @@ interface charData {
     height: string;
     weight: string;
     imgURL: string;
+    bio: string;
 };
 
 interface charsData extends Array<charData>{}
@@ -19,12 +20,13 @@ const charsData: charData[] = [
     name: "A",
     age: "125",
     species: "Human",
-    gender: "Male",
+    gender: "Sergal",
     sexuality: "gay msm",
     allignment: "chaotic neutral",
     height: "170",
     weight: "54",
     imgURL: "https://d.furaffinity.net/art/scaledscientist/1560355662/1560355662.scaledscientist_hiroji-traxon-2.png",
+    bio: "Hello there!",
   },
   {
     ownerUsername: "test1",
@@ -37,6 +39,7 @@ const charsData: charData[] = [
     height: "140",
     weight: "70",
     imgURL: "https://d.furaffinity.net/art/scaledscientist/1585250880/1585250880.scaledscientist_zellogi_s_derision_krita_wip_v3.jpg",
+    bio: "",
   },
   {
     ownerUsername: "test2",
@@ -49,6 +52,7 @@ const charsData: charData[] = [
     height: "",
     weight: "",
     imgURL: "https://d.furaffinity.net/art/scaledscientist/1541436639/1541436639.scaledscientist_ref_sheet_synteny_1_v2.png",
+    bio: "",
   },
 ];
 

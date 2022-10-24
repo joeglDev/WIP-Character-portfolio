@@ -4,8 +4,10 @@ import { db } from "../db/connection";
 //this needs to be defined from a connection
 import bcrypt from "bcrypt";
 import { saltRounds } from "../exports";
+import charsData from "../db/data/test/chars";
 
 const users = db.collection("users");
+const chars = db.collection("chars");
 
 export const selectUser = async (username: string, password: string) => {
   const userData = await users.find({ username: username }).toArray();
@@ -61,4 +63,9 @@ export const createNewUser = async (
       return invalidServerResponse;
     }
   }
+};
+
+export const selectAllCharacters = async () => {
+  const charData = await chars.find({}).toArray();
+  return charData
 };
