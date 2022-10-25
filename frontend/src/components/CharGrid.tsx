@@ -31,13 +31,13 @@ const CharGrid = () => {
 
   //button functions
   const pullAllCharData = async (event: React.MouseEvent<HTMLElement>) => {
-    const charData = await pullAllCharDataModel();
-    setCharData(charData.characters);
+    const actual= await pullAllCharDataModel();
+    setCharData(actual.characters);
   };
 
   const pullUserCharData = async (event: React.MouseEvent<HTMLElement>) => {
-    const charData = await pullUserCharDataModel(user);
-    setCharData(charData.characters);
+    const actual = await pullUserCharDataModel(user);
+    setCharData(actual.user_characters);
   };
 
   return (
@@ -66,14 +66,17 @@ const CharGrid = () => {
       </form>
       <ul className="charGrid__grid">
         {Array.isArray(charData)
-          ? charData.map(({ name, imgURL, ownerUsername }) => {
+          ? charData.map(({ name, imgURL, ownerUsername, _id }) => {
+            const [s, sets] = useState("")
               return (
-                <article className="charGrid__grid__item">
-                  <img
+                <article className="charGrid__grid__item" key={_id}>
+                    <div>
+                  <img id="a"
                     src={imgURL}
                     alt={`Character name: ${name}, Owner name: ${ownerUsername}`}
                   ></img>
-                  <p>{name}</p>
+                  <p id="b">{name}</p>
+                  </div>
                 </article>
               );
             })
