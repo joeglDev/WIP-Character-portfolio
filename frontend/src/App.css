@@ -50,7 +50,7 @@ header.header_auth {
 .login_button {
   border: none;
   background-color: white;
-
+  font-weight: bold;
 }
 
 .login_item_valid {
@@ -77,10 +77,43 @@ header.header_auth {
 
 @media only screen and (max-width: 600px) {
   .login_item {
-    font-size: 1vi;
+    font-size: 1.8vi;
+    margin: 1vi;
   }
 
   .current_user {
-    font-size: 1vi;
+    font-size: 2vi;
   }
+
+  /*  CharGrid  */
+
+
+}
+
+/*  CharGrid  */
+
+.chargrid__header {
+  text-align: center;
+}
+
+h2.chargrid__header {
+  font-size: 1rem;
+}
+
+.chargrid__form {
+  display: flex;
+  justify-content: center;
+}
+
+.chargrid__form__button {
+  height: 3rem;
+  width: auto;
+  margin: 1rem;
+  border: none;
+  background-color: white;
+  font-weight: bold;
+}
+
+.chargrid__form__button:hover {
+  background-color: rgb(250, 194, 89);
 }
