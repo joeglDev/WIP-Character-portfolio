@@ -154,5 +154,12 @@ h2.chargrid__header {
   margin: none;
 }
 
+@media only screen and (max-width: 600px) {
+  .charGrid__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 100%;
+  }
+}
 
 
