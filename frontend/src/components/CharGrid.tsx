@@ -4,6 +4,7 @@ import {
   pullAllCharDataModel,
   pullUserCharDataModel,
 } from "../models/API_calls";
+import CharGridItem from "./CharGridItem";
 
 const CharGrid = () => {
   //context
@@ -31,7 +32,7 @@ const CharGrid = () => {
 
   //button functions
   const pullAllCharData = async (event: React.MouseEvent<HTMLElement>) => {
-    const actual= await pullAllCharDataModel();
+    const actual = await pullAllCharDataModel();
     setCharData(actual.characters);
   };
 
@@ -66,19 +67,8 @@ const CharGrid = () => {
       </form>
       <ul className="charGrid__grid">
         {Array.isArray(charData)
-          ? charData.map(({ name, imgURL, ownerUsername, _id }) => {
-            const [s, sets] = useState("")
-              return (
-                <article className="charGrid__grid__item" key={_id}>
-                    <div>
-                  <img id="a"
-                    src={imgURL}
-                    alt={`Character name: ${name}, Owner name: ${ownerUsername}`}
-                  ></img>
-                  <p id="b">{name}</p>
-                  </div>
-                </article>
-              );
+          ? charData.map((char) => {
+              return <CharGridItem char={char} key={char._id}></CharGridItem>;
             })
           : null}
       </ul>
