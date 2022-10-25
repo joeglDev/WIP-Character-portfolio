@@ -1,6 +1,7 @@
 import "./App.css";
 import { createContext, useState } from "react";
 import LoginBar from "./components/LoginBar";
+import  CharGrid  from "./components/CharGrid";
 
 //types for context
 type UserContextType = {
@@ -17,6 +18,7 @@ function App() {
   return (
     <UserContext.Provider value={{user, setUser}}>
       <LoginBar></LoginBar>
+      <CharGrid></CharGrid>
     </UserContext.Provider>
   );
 }

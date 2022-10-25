@@ -4,6 +4,7 @@ import { seed } from "../db/seeds/seed-test";
 import app from "../server";
 import Endpoints from "../Endpoints";
 
+
 /*
 beforeAll(() => {
   seed()
@@ -68,7 +69,76 @@ describe("registration", () => {
         expect(body).toEqual({
           username: "test1",
           msg: "400-duplicate username",
-          status: 400
+          status: 400,
+        });
+      });
+  });
+});
+
+describe("invalid API endpoints", () => {
+  test("invalid API endpoint returns http status 404 and msg", () => {
+    return request(app)
+      .get("/invalid")
+      .expect(404)
+      .then(({ body }: any) => {
+        expect(body.invalid_request).toEqual({
+          status: 404,
+          msg: "404-invalid endpoint",
+        });
+      });
+  });
+});
+
+describe("get char data", () => {
+  test("get all char data", () => {
+    return request(app)
+      .get(Endpoints.charactersEnd)
+      .expect(200)
+      .then(({ body }: any) => {
+        body.characters.forEach((char: any) => {
+          expect(char).toEqual(
+            expect.objectContaining({
+              _id: expect.any(String),
+              age: expect.any(String),
+              allignment: expect.any(String),
+              gender: expect.any(String),
+              sexuality: expect.any(String),
+              height: expect.any(String),
+              weight: expect.any(String),
+              imgURL: expect.any(String),
+              species: expect.any(String),
+              name: expect.any(String),
+              ownerUsername: expect.any(String),
+              bio: expect.any(String),
+            })
+          );
+        });
+      });
+  });
+
+  test("get a specific users characters by username", () => {
+    return request(app)
+      .get("/characters/test1")
+      .expect(200)
+      .then(({ body }: any) => {
+        expect(body.user_characters.length).toBe(2);
+        body.user_characters.forEach((char: any) => {
+          expect(char).toEqual(
+            expect.objectContaining({
+              _id: expect.any(String),
+              age: expect.any(String),
+              allignment: expect.any(String),
+              gender: expect.any(String),
+              sexuality: expect.any(String),
+              height: expect.any(String),
+              weight: expect.any(String),
+              imgURL: expect.any(String),
+              species: expect.any(String),
+              name: expect.any(String),
+              ownerUsername: expect.any(String),
+              bio: expect.any(String),
+            })
+          );
         });
       });
   });
