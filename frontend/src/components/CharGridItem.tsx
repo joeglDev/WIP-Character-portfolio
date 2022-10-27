@@ -4,7 +4,7 @@ const CharGridItem = ({char}:any) => {
     const {_id, name, ownerUsername, imgURL} =char;
 
     //states
-    const [testState, setTestState] = useState("");
+    const [isOpen, setIsOpen] = useState(false);
     //implements component composition toggle here
 
     return (
