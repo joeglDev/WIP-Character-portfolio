@@ -1,7 +1,8 @@
 import { useState } from "react";
+import CharDetails from "./CharDetails";
 
 const CharGridItem = ({ char }: any) => {
-  const { _id, name, ownerUsername, imgURL } = char;
+  const { name, ownerUsername, imgURL } = char;
 
   //states
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +12,8 @@ const CharGridItem = ({ char }: any) => {
     let inverseIsOpen = !isOpen;
     setIsOpen(inverseIsOpen);
   };
+
+  //details of a specific character
 
   return (
     <article
@@ -27,6 +30,8 @@ const CharGridItem = ({ char }: any) => {
         ></img>
         <p id="b">{char.name}</p>
       </div>
+
+      <CharDetails charDetails={char} isOpenState={isOpen}></CharDetails>
     </article>
   );
 };
