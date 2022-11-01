@@ -26,11 +26,11 @@ const CharDetails = () => {
       <section className="charGrid__details">
         <div className="charGrid__details__item">
         <h3>{name}</h3>
-          <div>
+          <div className="charGrid__details__catagory__div">
             <p className="charGrid__details__title">
               Created by:
-              {ownerUsername}
             </p>
+            <p className="charGrid__details__title">{ownerUsername}</p>
           </div>
           <div className="charGrid__details__catagory__div">
             <p className="charGrid__details__title">Age: </p>

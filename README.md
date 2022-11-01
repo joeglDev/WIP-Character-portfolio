@@ -29,12 +29,3 @@ Special thanks to the following for their aid:
 
 
 
-Goal: Click on a character card grom the character grid and display information on said character.
-
-Solution 1: Conditionally render a character details element on click; passing down character object prop from the character card to the character details element.
-Problem: Character details element renders as a grid item FOR EACH character card grid item; creating a messy layout if multiple character card detail elements are open.
-
-Solution 2: Extract out character details element to render above grid in same parent element as character grid.
-Problem: Cannot pass selected character stdata up elements in same parant element from a child element (character grid card clicked). 
-
-Solution 3: Character details element sits above grid and character objects are passed into it using a new React Context Provider. This enables the character state to be passed into elements globally; regardless of their position in the tree. Conditionally render this element only if selected character context provider is not undefined.

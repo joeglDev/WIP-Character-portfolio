@@ -195,9 +195,8 @@ h2.chargrid__header {
   width: 25rem;
   height: 25rem;
   text-align: center;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  background-color: aliceblue;
+padding-left: 0.8rem;
+
 }
 
 .charGrid__details__item img {
@@ -209,4 +208,11 @@ h2.chargrid__header {
 
 .charGrid__details__catagory__div {
   display: flex;
+  position: relative;
+  left: 30%;
 }
+
+.charGrid__details__title {
+  margin-right: 1rem;
+}
+
