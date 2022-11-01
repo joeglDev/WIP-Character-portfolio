@@ -4,6 +4,7 @@ import {
   pullAllCharDataModel,
   pullUserCharDataModel,
 } from "../models/API_calls";
+import CharDetails from "./CharDetails";
 import CharGridItem from "./CharGridItem";
 
 const CharGrid = () => {
@@ -66,6 +67,7 @@ const CharGrid = () => {
         </button>
       </form>
       <ul className="charGrid__grid">
+        <CharDetails></CharDetails>
         {Array.isArray(charData)
           ? charData.map((char) => {
               return <CharGridItem char={char} key={char._id}></CharGridItem>;

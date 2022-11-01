@@ -1,25 +1,22 @@
-const CharDetails = ({charDetails, isOpenState } : any) => {
-const {name} = charDetails
-if  (isOpenState === true) {
-return (
-    <section className="CharDetails__card">
+import { useContext } from "react";
+import { SelectedCharacterContext } from "../App";
+
+const CharDetails = () => {
+  //context
+  const context = useContext(SelectedCharacterContext);
+  const selectedCharacter = context.selectedCharacter;
+
+  if (!selectedCharacter) {
+    return <section className="charGrid__grid__item placeholder"></section>;
+  } else {
+    //destructure selectedCharacter
+    const { name } = selectedCharacter;
+    return (
+      <section className="charGrid__grid__item">
         <h3>{name}</h3>
-        <div>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-            <p>Age: {}</p>
-        </div>
-    </section>
-)
-} else {return <></>}  
+      </section>
+    );
+  }
 };
 
 export default CharDetails;

@@ -1,26 +1,17 @@
-import { useState } from "react";
-import CharDetails from "./CharDetails";
+import {  useContext } from "react";
+import { SelectedCharacterContext } from "../App";
 
 const CharGridItem = ({ char }: any) => {
   const { name, ownerUsername, imgURL } = char;
 
-  //states
-  const [isOpen, setIsOpen] = useState(false);
-
-  //functions
-  const toggleOpen = () => {
-    let inverseIsOpen = !isOpen;
-    setIsOpen(inverseIsOpen);
-  };
-
-  //details of a specific character
+  //context
+  const context = useContext(SelectedCharacterContext);
+  const setSelectedCharacter = context.setSelectedCharacter;
 
   return (
     <article
       className="charGrid__grid__item"
-      onClick={() => {
-        toggleOpen();
-      }}
+      onClick={(() => {setSelectedCharacter(char)})}
     >
       <div>
         <img
@@ -31,7 +22,7 @@ const CharGridItem = ({ char }: any) => {
         <p id="b">{char.name}</p>
       </div>
 
-      <CharDetails charDetails={char} isOpenState={isOpen}></CharDetails>
+     
     </article>
   );
 };
