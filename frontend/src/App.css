@@ -130,10 +130,10 @@ h2.chargrid__header {
 
 }
 
-.charGrid__grid__item  img {
+.charGrid__grid__item img {
   height: 25rem;
- width: 25rem;
- overflow: hidden;
+  width: 25rem;
+  overflow: hidden;
 }
 
 .charGrid__grid__item p {
@@ -150,7 +150,7 @@ h2.chargrid__header {
   opacity: 0.5;
 }
 
-#a:hover + #b {
+#a:hover+#b {
   opacity: 1;
   margin: none;
 }
@@ -163,30 +163,50 @@ h2.chargrid__header {
     margin: auto;
   }
 
-  .charGrid__grid__item  img {
+  .charGrid__grid__item img {
     height: 15rem;
-   width: 15rem;
-   overflow: hidden;
-   margin: auto;
+    width: 15rem;
+    overflow: hidden;
+    margin: auto;
   }
 
-  .charGrid__grid__item  div{
+  .charGrid__grid__item div {
     margin-left: 3.5rem;
     margin-right: auto;
   }
 
-  .charGrid__grid__item  p{
+  .charGrid__grid__item p {
     left: 35%;
-  bottom: 65%;
+    bottom: 65%;
+  }
+
+
 }
 
-
-}  
-
 /*  character Details*/
-.placeholder {
-  background-color: white;
-  overflow: hidden;
+.charGrid__details {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: auto auto auto;
+
+}
+
+.charGrid__details__item {
   width: 25rem;
   height: 25rem;
+  text-align: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  background-color: aliceblue;
+}
+
+.charGrid__details__item img {
+  margin: auto;
+  width: 25rem;
+  height: 25rem;
+  overflow: hidden;
+}
+
+.charGrid__details__catagory__div {
+  display: flex;
 }

@@ -66,8 +66,8 @@ const CharGrid = () => {
           Your characters
         </button>
       </form>
+      <CharDetails></CharDetails>
       <ul className="charGrid__grid">
-        <CharDetails></CharDetails>
         {Array.isArray(charData)
           ? charData.map((char) => {
               return <CharGridItem char={char} key={char._id}></CharGridItem>;
