@@ -27,7 +27,6 @@ export const registrationModel = async (username: string, password: string) => {
 export const pullAllCharDataModel = async () => {
   const rawResponse = await fetch("http://localhost:9124/characters");
   const response = await rawResponse.json();
-  console.log(response)
   return response
   };
   
