@@ -32,7 +32,7 @@ const CharDetails = () => {
           <ul>
             {keys.map((key) => {
               return (
-                <li className="charGrid__details__catagory__li">
+                <li className="charGrid__details__catagory__li" key={key}>
                   <p className="charGrid__details__title">{key === "ownerUsername" ? "Owner" : uppercaseKeys(key)}:</p>
                   <p className="charGrid__details__title">
                     {selectedCharacter[key]}
