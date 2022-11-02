@@ -206,10 +206,11 @@ padding-left: 0.8rem;
   overflow: hidden;
 }
 
-.charGrid__details__catagory__div {
+.charGrid__details__catagory__li {
   display: flex;
   position: relative;
   left: 30%;
+  line-height: 0.25;
 }
 
 .charGrid__details__title {
