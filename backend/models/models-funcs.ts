@@ -127,11 +127,13 @@ export const writeNewUserCharacter = async (
 };
 
 export const modelDelUserCharacter = async (id: string) => {
-  console.log(id);
   const ObjectID = require("mongodb").ObjectID;
   var mongodb = require("mongodb");
   // grab char data before delete to return
   const char = await chars.findOne(ObjectID(id));
+  if (char === null) {
+    return Promise.reject({id: id, msg:"404-character not found"});
+  }
   const deletedCharacter = await chars.deleteOne({
     _id: new mongodb.ObjectID(id),
   });

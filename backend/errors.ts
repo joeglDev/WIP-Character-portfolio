@@ -19,6 +19,11 @@ export const handleCustomErrors = (
       invalid_user: { status: 404, username: err.username, msg: err.msg },
     };
     res.status(404).send(responseBody);
+  } else if (err.msg === "404-character not found") {
+    const responseBody = {
+      invalid_character: { status: 404, id: err.id, msg: err.msg },
+    };
+    res.status(404).send(responseBody);
   }
 };
 

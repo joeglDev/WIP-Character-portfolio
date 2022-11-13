@@ -98,10 +98,17 @@ export const postNewUserCharacter = async (
   }
 };
 
-export const controllerDelUserCharacter = async ( req: Request,
-  res: Response,) => {
+export const controllerDelUserCharacter = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
     const id = req.params.id;
     const deletedChar = await modelDelUserCharacter(id);
-    const responseBody = {deleted_character: deletedChar}
+    const responseBody = { deleted_character: deletedChar };
     res.status(200).send(responseBody);
-  };
+  } catch (err) {
+    next(err);
+  }
+};

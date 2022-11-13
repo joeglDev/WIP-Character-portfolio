@@ -258,7 +258,7 @@ describe("post a new character", () => {
   });
 });
 
-describe.only("can delete an existing character", () => {
+describe("can delete an existing character", () => {
   test("newly created char is deleted", () => {
     const testBody = {
       new_character: {
@@ -302,6 +302,22 @@ describe.only("can delete an existing character", () => {
               })
             );
           });
+      });
+  });
+
+  //char not found
+  test("404 no character found to delete", () => {
+    return request(app)
+      .delete("/characters/test1/637165bb10bc4fdd2137ec8b")
+      .expect(404)
+      .then(({ body }: any) => {
+        expect(body.invalid_character).toEqual(
+          expect.objectContaining({
+            id: expect.any(String),
+            msg: expect.any(String),
+            status: expect.any(Number),
+          })
+        );
       });
   });
 });
