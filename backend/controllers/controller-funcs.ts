@@ -3,6 +3,7 @@ import {
   selectAllCharacters,
   selectUser,
   selectUserCharacters,
+  writeNewUserCharacter,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
 
@@ -80,3 +81,9 @@ export const getUserChars = async (req: Request, res: Response) => {
     console.log(err);
   }
 };
+
+export const postNewUserCharacter = async () => {
+
+  const modelWrite = await writeNewUserCharacter;
+};
+

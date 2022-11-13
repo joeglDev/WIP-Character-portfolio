@@ -1,7 +1,7 @@
 //import express = require("express");
 import express from "express";
 import cors from "cors";
-import { getAllChars, getUserChars, postLogin, postNewUser } from "./controllers/controller-funcs";
+import { getAllChars, getUserChars, postLogin, postNewUser, postNewUserCharacter } from "./controllers/controller-funcs";
 import Endpoints from "./Endpoints";
 import { handleCustomErrors, handleInvalidPaths } from "./errors";
 
@@ -21,6 +21,7 @@ app.post(Endpoints.login, postLogin);
 app.post(Endpoints.register, postNewUser);
 app.get(Endpoints.charactersEnd, getAllChars);
 app.get(Endpoints.userCharactersEnd, getUserChars);
+app.post(Endpoints.userCharactersEnd, postNewUserCharacter);
 
 //error handling
 app.get(Endpoints.invalidEnd, handleInvalidPaths);

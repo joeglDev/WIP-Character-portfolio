@@ -74,3 +74,5 @@ export const selectUserCharacters = async (username: string) => {
   const charData = await chars.find({ownerUsername: username}).toArray();
   return charData
 };
+
+export const writeNewUserCharacter =  () => {};
