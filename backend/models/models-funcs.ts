@@ -108,7 +108,10 @@ export const writeNewUserCharacter = async (
       if (!checkUser) {
         return Promise.reject({status: 404, username: username, msg: "404-user not found"})
       } else {
-        console.log("user found")
+         const newCharInsert = await users.insertOne(newCharacter);
+         const newChar = await users.find({name: "char_test_1"}).toArray();
+         return newChar
+
       }
       //if not found return new err
     }

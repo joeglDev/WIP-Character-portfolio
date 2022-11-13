@@ -143,7 +143,7 @@ describe("get char data", () => {
   });
 });
 
-describe.only("post a new character", () => {
+describe("post a new character", () => {
   test("empty body gives 400 error", () => {
     const emptyBody = { new_character: {} };
     return request(app)
@@ -202,21 +202,60 @@ describe.only("post a new character", () => {
         weight: "",
         imgURL: "",
         bio: "",
-      }};
+      },
+    };
     return request(app)
-    .post("/characters/invalid user")
-    .send(testBody)
-    .expect(404)
-    .then(({ body }: any) => {
-      expect(body.invalid_user).toEqual({
-        status: 404,
-        username: "invalid user",
-        msg: "404-user not found",
+      .post("/characters/invalid user")
+      .send(testBody)
+      .expect(404)
+      .then(({ body }: any) => {
+        expect(body.invalid_user).toEqual({
+          status: 404,
+          username: "invalid user",
+          msg: "404-user not found",
+        });
       });
-    });
-  })
+  });
 
-  //test("correct body gives 201 http code", () => {});
+  test("correct body gives 201 http code", () => {
+    const testBody = {
+      new_character: {
+        ownerUsername: "test1",
+        name: "char_test_1",
+        age: "",
+        species: "",
+        gender: "",
+        sexuality: "",
+        allignment: "",
+        height: "",
+        weight: "",
+        imgURL: "",
+        bio: "",
+      },
+    };
+    return request(app)
+      .post("/characters/test1")
+      .send(testBody)
+      .expect(201)
+      .then(({ body }: any) => {
+        expect(body.character_created).toEqual(
+          expect.objectContaining({
+            _id: expect.any(String),
+            age: expect.any(String),
+            allignment: expect.any(String),
+            gender: expect.any(String),
+            sexuality: expect.any(String),
+            height: expect.any(String),
+            weight: expect.any(String),
+            imgURL: expect.any(String),
+            species: expect.any(String),
+            name: expect.any(String),
+            ownerUsername: expect.any(String),
+            bio: expect.any(String),
+          })
+        );
+      });
+  });
 });
 
 /*
