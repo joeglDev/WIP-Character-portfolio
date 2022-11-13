@@ -75,6 +75,8 @@ export const selectUserCharacters = async (username: string) => {
   return charData;
 };
 
+//improvement use a util func to check user exists
+//also only render post char on front end if logged in
 export const writeNewUserCharacter = async (
   username: string,
   newCharacter: any
@@ -93,7 +95,7 @@ export const writeNewUserCharacter = async (
       imgURL,
       bio,
     } = newCharacter;
-    if (ownerUsername === undefined || name === undefined) {
+    if (ownerUsername === undefined || name === undefined || ownerUsername === "" || name === "") {
       return Promise.reject({
         username: username,
         msg: "400-invalid response body",
