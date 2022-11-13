@@ -4,7 +4,6 @@ import { seed } from "../db/seeds/seed-test";
 import app from "../server";
 import Endpoints from "../Endpoints";
 
-
 /*
 beforeAll(() => {
   seed()
@@ -143,6 +142,43 @@ describe("get char data", () => {
       });
   });
 });
+
+describe("post a new character", () => {
+  test.only("empty body gives 400 error", () => {
+    const emptyBody = { new_character: {} };
+    return request(app)
+      .post("/characters/test1")
+      .send(emptyBody)
+      .expect(400)
+      .then(({ body }: any) => {
+        expect(body.invalid_body).toEqual({
+          status: 400,
+          username: "test1",
+          msg: "400-invalid response body",
+        });
+      });
+  });
+
+  // test("incorrect body gives 400 error", () => {});
+
+  // test("no user found err", () => {})
+
+  //test("correct body gives 201 http code", () => {});
+});
+
+/*
+{ownerUsername: "",
+    name: "",
+    age: "",
+    species: "",
+    gender: "",
+    sexuality: "",
+    allignment: "",
+    height: "",
+    weight: "",
+    imgURL: "",
+    bio: ""}
+*/
 
 afterAll(() => {
   client.close();

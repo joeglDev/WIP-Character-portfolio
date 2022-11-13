@@ -7,7 +7,6 @@ import {
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
 
-
 //objects
 interface loginResponseObject {
   login_response: { username: string; outcome: string };
@@ -82,8 +81,16 @@ export const getUserChars = async (req: Request, res: Response) => {
   }
 };
 
-export const postNewUserCharacter = async () => {
-
-  const modelWrite = await writeNewUserCharacter;
+export const postNewUserCharacter = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const username = req.params.username;
+  const newCharacter = req.body.new_character;
+  try {
+    const modelWrite = await writeNewUserCharacter(username, newCharacter);
+  } catch (err) {
+    next(err);
+  }
 };
-

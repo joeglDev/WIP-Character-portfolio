@@ -67,12 +67,40 @@ export const createNewUser = async (
 
 export const selectAllCharacters = async () => {
   const charData = await chars.find({}).toArray();
-  return charData
+  return charData;
 };
 
 export const selectUserCharacters = async (username: string) => {
-  const charData = await chars.find({ownerUsername: username}).toArray();
-  return charData
+  const charData = await chars.find({ ownerUsername: username }).toArray();
+  return charData;
 };
 
-export const writeNewUserCharacter =  () => {};
+export const writeNewUserCharacter = async (
+  username: string,
+  newCharacter: any
+) => {
+  try {
+    const {
+      ownerUsername,
+      name,
+      age,
+      species,
+      gender,
+      sexuality,
+      allignment,
+      height,
+      weight,
+      imgURL,
+      bio,
+    } = newCharacter;
+    if (ownerUsername === undefined || name === undefined) {
+      return Promise.reject({
+        username: username,
+        msg: "400-invalid response body",
+      });
+    }
+    //const newUserCharacter = await chars.insertOne({});
+  } catch (err) {
+    console.log("model err", err);
+  }
+};
