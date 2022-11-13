@@ -7,7 +7,6 @@ import { saltRounds } from "../exports";
 import charsData from "../db/data/test/chars";
 import { doesUserExist } from "./utils";
 
-
 const users = db.collection("users");
 const chars = db.collection("chars");
 
@@ -97,7 +96,12 @@ export const writeNewUserCharacter = async (
       imgURL,
       bio,
     } = newCharacter;
-    if (ownerUsername === undefined || name === undefined || ownerUsername === "" || name === "") {
+    if (
+      ownerUsername === undefined ||
+      name === undefined ||
+      ownerUsername === "" ||
+      name === ""
+    ) {
       return Promise.reject({
         username: username,
         msg: "400-invalid response body",
@@ -106,15 +110,35 @@ export const writeNewUserCharacter = async (
       //call func to find users
       const checkUser = await doesUserExist(username);
       if (!checkUser) {
-        return Promise.reject({status: 404, username: username, msg: "404-user not found"})
+        return Promise.reject({
+          status: 404,
+          username: username,
+          msg: "404-user not found",
+        });
       } else {
-         const newCharInsert = await chars.insertOne(newCharacter);
-         const newChar = await chars.find({name: "char_test_1"}).toArray();
-         return newChar
-
+        const newCharInsert = await chars.insertOne(newCharacter);
+        const newChar = await chars.find({ name: "char_test_1" }).toArray();
+        return newChar;
       }
       //if not found return new err
     }
     //const newUserCharacter = await chars.insertOne({});
-  } catch(err) {}
+  } catch (err) {}
+};
+
+export const modelDelUserCharacter = async (id: string) => {
+  console.log(id);
+  const ObjectID = require("mongodb").ObjectID;
+  var mongodb = require("mongodb");
+  // grab char data before delete to return
+  const char = await chars.findOne(ObjectID(id));
+  const deletedCharacter = await chars.deleteOne({
+    _id: new mongodb.ObjectID(id),
+  });
+  if (
+    deletedCharacter.acknowledged === true &&
+    deletedCharacter.deletedCount === 1
+  ) {
+    return char;
+  }
 };

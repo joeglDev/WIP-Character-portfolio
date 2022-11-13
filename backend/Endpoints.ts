@@ -4,6 +4,7 @@ class Endpoints {
   static invalidEnd: string = "*";
   static charactersEnd: string = "/characters";
   static userCharactersEnd: string = "/characters/:username";
+  static specificUserCharacterEnd: string = "/characters/:username/:id";
 }
 
 export default Endpoints;

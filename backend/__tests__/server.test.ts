@@ -258,6 +258,54 @@ describe("post a new character", () => {
   });
 });
 
+describe.only("can delete an existing character", () => {
+  test("newly created char is deleted", () => {
+    const testBody = {
+      new_character: {
+        ownerUsername: "test1",
+        name: "char_test_2",
+        age: "",
+        species: "",
+        gender: "",
+        sexuality: "",
+        allignment: "",
+        height: "",
+        weight: "",
+        imgURL: "",
+        bio: "",
+      },
+    };
+    return request(app)
+      .post("/characters/test1")
+      .send(testBody)
+      .then(({ body }: any) => {
+        const charToDelete = body.character_created._id;
+        console.log(charToDelete);
+        return request(app)
+          .delete(`/characters/test1/${charToDelete}`)
+          .expect(200)
+          .then(({ body }: any) => {
+            expect(body.deleted_character).toEqual(
+              expect.objectContaining({
+                _id: expect.any(String),
+                age: expect.any(String),
+                allignment: expect.any(String),
+                gender: expect.any(String),
+                sexuality: expect.any(String),
+                height: expect.any(String),
+                weight: expect.any(String),
+                imgURL: expect.any(String),
+                species: expect.any(String),
+                name: expect.any(String),
+                ownerUsername: expect.any(String),
+                bio: expect.any(String),
+              })
+            );
+          });
+      });
+  });
+});
+
 /*
 {ownerUsername: "",
     name: "",

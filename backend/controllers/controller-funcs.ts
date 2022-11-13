@@ -1,5 +1,6 @@
 import {
   createNewUser,
+  modelDelUserCharacter,
   selectAllCharacters,
   selectUser,
   selectUserCharacters,
@@ -96,3 +97,11 @@ export const postNewUserCharacter = async (
     next(err);
   }
 };
+
+export const controllerDelUserCharacter = async ( req: Request,
+  res: Response,) => {
+    const id = req.params.id;
+    const deletedChar = await modelDelUserCharacter(id);
+    const responseBody = {deleted_character: deletedChar}
+    res.status(200).send(responseBody);
+  };
