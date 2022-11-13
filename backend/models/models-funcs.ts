@@ -6,7 +6,7 @@ import bcrypt from "bcrypt";
 import { saltRounds } from "../exports";
 import charsData from "../db/data/test/chars";
 import { doesUserExist } from "./utils";
-import { nextTick } from "process";
+
 
 const users = db.collection("users");
 const chars = db.collection("chars");
@@ -108,8 +108,8 @@ export const writeNewUserCharacter = async (
       if (!checkUser) {
         return Promise.reject({status: 404, username: username, msg: "404-user not found"})
       } else {
-         const newCharInsert = await users.insertOne(newCharacter);
-         const newChar = await users.find({name: "char_test_1"}).toArray();
+         const newCharInsert = await chars.insertOne(newCharacter);
+         const newChar = await chars.find({name: "char_test_1"}).toArray();
          return newChar
 
       }
