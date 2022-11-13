@@ -14,6 +14,11 @@ export const handleCustomErrors = (
       invalid_body: { status: 400, username: err.username, msg: err.msg },
     };
     res.status(400).send(responseBody);
+  } else if (err.msg === "404-user not found") {
+    const responseBody = {
+      invalid_user: { status: 404, username: err.username, msg: err.msg },
+    };
+    res.status(404).send(responseBody);
   }
 };
 

@@ -188,7 +188,33 @@ describe.only("post a new character", () => {
       });
   });
 
-  // test("no user found err", () => {})
+  test("no user found err", () => {
+    const testBody = {
+      new_character: {
+        ownerUsername: "invalid user",
+        name: "char_test_1",
+        age: "",
+        species: "",
+        gender: "",
+        sexuality: "",
+        allignment: "",
+        height: "",
+        weight: "",
+        imgURL: "",
+        bio: "",
+      }};
+    return request(app)
+    .post("/characters/invalid user")
+    .send(testBody)
+    .expect(404)
+    .then(({ body }: any) => {
+      expect(body.invalid_user).toEqual({
+        status: 404,
+        username: "invalid user",
+        msg: "404-user not found",
+      });
+    });
+  })
 
   //test("correct body gives 201 http code", () => {});
 });

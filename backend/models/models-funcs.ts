@@ -5,6 +5,8 @@ import { db } from "../db/connection";
 import bcrypt from "bcrypt";
 import { saltRounds } from "../exports";
 import charsData from "../db/data/test/chars";
+import { doesUserExist } from "./utils";
+import { nextTick } from "process";
 
 const users = db.collection("users");
 const chars = db.collection("chars");
@@ -100,9 +102,16 @@ export const writeNewUserCharacter = async (
         username: username,
         msg: "400-invalid response body",
       });
+    } else {
+      //call func to find users
+      const checkUser = await doesUserExist(username);
+      if (!checkUser) {
+        return Promise.reject({status: 404, username: username, msg: "404-user not found"})
+      } else {
+        console.log("user found")
+      }
+      //if not found return new err
     }
     //const newUserCharacter = await chars.insertOne({});
-  } catch (err) {
-    console.log("model err", err);
-  }
+  } catch(err) {}
 };
