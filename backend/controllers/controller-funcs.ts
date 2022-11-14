@@ -1,11 +1,13 @@
 import {
   createNewUser,
+  modelDelUserCharacter,
   selectAllCharacters,
   selectUser,
   selectUserCharacters,
+  updateCharacter,
+  writeNewUserCharacter,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
-
 
 //objects
 interface loginResponseObject {
@@ -78,5 +80,53 @@ export const getUserChars = async (req: Request, res: Response) => {
     res.status(200).send(responseBody);
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const postNewUserCharacter = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const username = req.params.username;
+  const newCharacter = req.body.new_character;
+  try {
+    const modelWrite = await writeNewUserCharacter(username, newCharacter);
+    const responseBody = { character_created: modelWrite[0] };
+    res.status(201).send(responseBody);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const controllerDelUserCharacter = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.params.id;
+    const deletedChar = await modelDelUserCharacter(id);
+    const responseBody = { deleted_character: deletedChar };
+    res.status(200).send(responseBody);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const patchCharacter = async (req: Request, res: Response,  next: NextFunction) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    //reject request body for update if does not have key keys
+    if (data.hasOwnProperty("name") === false || data.hasOwnProperty("ownerUsername") === false) {
+      throw Error("400- invalid character update request body")
+    }
+    
+    const patchedCharacter = await updateCharacter(id, data);
+    const responseBody = { updated_character: patchedCharacter };
+    res.status(200).send(responseBody);
+  } catch (err) {
+    next(err);
   }
 };
