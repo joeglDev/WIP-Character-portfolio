@@ -132,7 +132,7 @@ export const modelDelUserCharacter = async (id: string) => {
   // grab char data before delete to return
   const char = await chars.findOne(ObjectID(id));
   if (char === null) {
-    return Promise.reject({id: id, msg:"404-character not found"});
+    return Promise.reject({ id: id, msg: "404-character not found" });
   }
   const deletedCharacter = await chars.deleteOne({
     _id: new mongodb.ObjectID(id),
@@ -142,5 +142,18 @@ export const modelDelUserCharacter = async (id: string) => {
     deletedCharacter.deletedCount === 1
   ) {
     return char;
+  }
+};
+
+export const updateCharacter = async (id: string, data: any) => {
+  try {
+    const ObjectID = require("mongodb").ObjectID;
+    const update = await chars.update({ _id: ObjectID(id) }, { $set: data });
+    const changedValue = await await chars.findOne(ObjectID(id));
+    if (update.acknowledged === true && update.modifiedCount === 1) {
+      return changedValue;
+    }
+  } catch (err) {
+    console.log(err);
   }
 };

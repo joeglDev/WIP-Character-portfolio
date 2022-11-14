@@ -322,6 +322,60 @@ describe("can delete an existing character", () => {
   });
 });
 
+describe.only("update existing character", () => {
+  //CAN UPDATE char
+  test("http 200 and updated body for successful patch request of a character", () => {
+    //get a in use id for use in request
+    const updateBody = {
+      ownerUsername: "test1",
+      name: "test2",
+      age: "test3",
+      species: "test4",
+      gender: "test5",
+      sexuality: "test6",
+      allignment: "test7",
+      height: "test8",
+      weight: "test9",
+      imgURL: "test10",
+      bio: "test11",
+    };
+    return request(app)
+      .get("/characters/test1")
+      .then(({ body }: any) => {
+        const id = body.user_characters[0]._id;
+        expect(typeof id).toBe("string");
+        return request(app)
+          .patch(`/characters/test1/${id}`)
+          .send(updateBody)
+          .expect(200)
+          .then(({ body }: any) => {
+            expect(
+              body.updated_character).toEqual(
+                expect.objectContaining({
+                  _id: expect.any(String),
+                  age: expect.any(String),
+                  allignment: expect.any(String),
+                  gender: expect.any(String),
+                  sexuality: expect.any(String),
+                  height: expect.any(String),
+                  weight: expect.any(String),
+                  imgURL: expect.any(String),
+                  species: expect.any(String),
+                  name: expect.any(String),
+                  ownerUsername: expect.any(String),
+                  bio: expect.any(String),
+                })
+          )}
+            );
+          });
+      });
+
+    //return request(app).patch()
+  });
+  //404 if not found
+  //400 if no valid field sent
+
+
 /*
 {ownerUsername: "",
     name: "",

@@ -4,6 +4,7 @@ import {
   selectAllCharacters,
   selectUser,
   selectUserCharacters,
+  updateCharacter,
   writeNewUserCharacter,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
@@ -110,5 +111,17 @@ export const controllerDelUserCharacter = async (
     res.status(200).send(responseBody);
   } catch (err) {
     next(err);
+  }
+};
+
+export const patchCharacter = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const patchedCharacter = await updateCharacter(id, data);
+    const responseBody = { updated_character: patchedCharacter };
+    res.status(200).send(responseBody);
+  } catch (err) {
+    console.log(err);
   }
 };
