@@ -24,6 +24,11 @@ export const handleCustomErrors = (
       invalid_character: { status: 404, id: err.id, msg: err.msg },
     };
     res.status(404).send(responseBody);
+  } else if (err.message === "400- invalid character update request body") {
+    const responseBody = {
+      invalid_body: { status: 400, msg: err.message},
+    };
+    res.status(400).send(responseBody);
   }
 };
 

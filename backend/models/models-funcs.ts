@@ -148,12 +148,18 @@ export const modelDelUserCharacter = async (id: string) => {
 export const updateCharacter = async (id: string, data: any) => {
   try {
     const ObjectID = require("mongodb").ObjectID;
+    //extract this out to a util func
+    const isFound = await chars.findOne(ObjectID(id));
+    if (isFound === null) {
+      return Promise.reject({ id: id, msg: "404-character not found" });
+    }
+
     const update = await chars.update({ _id: ObjectID(id) }, { $set: data });
     const changedValue = await await chars.findOne(ObjectID(id));
     if (update.acknowledged === true && update.modifiedCount === 1) {
       return changedValue;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 };

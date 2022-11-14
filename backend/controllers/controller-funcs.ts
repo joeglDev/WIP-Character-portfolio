@@ -114,14 +114,19 @@ export const controllerDelUserCharacter = async (
   }
 };
 
-export const patchCharacter = async (req: Request, res: Response) => {
+export const patchCharacter = async (req: Request, res: Response,  next: NextFunction) => {
   try {
     const id = req.params.id;
     const data = req.body;
+    //reject request body for update if does not have key keys
+    if (data.hasOwnProperty("name") === false || data.hasOwnProperty("ownerUsername") === false) {
+      throw Error("400- invalid character update request body")
+    }
+    
     const patchedCharacter = await updateCharacter(id, data);
     const responseBody = { updated_character: patchedCharacter };
     res.status(200).send(responseBody);
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 };
