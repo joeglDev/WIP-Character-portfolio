@@ -42,6 +42,10 @@ const CharGrid = () => {
     setCharData(actual.user_characters);
   };
 
+  const deleteCharacter = async (event: React.MouseEvent<HTMLElement>) => {
+    //grab selected char data and feed to model
+  };
+
   return (
     <section>
       <h1 className="chargrid__header">Welcome {user}</h1>
@@ -64,6 +68,14 @@ const CharGrid = () => {
           onClick={pullUserCharData}
         >
           Your characters
+        </button>
+        <button
+          className="chargrid__form__button"
+          type="button"
+          aria-label="delete selected character"
+          onClick={deleteCharacter}
+        >
+          Delete selected character
         </button>
       </form>
       <CharDetails></CharDetails>
