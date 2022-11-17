@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../App";
+import { SelectedCharacterContext, UserContext } from "../App";
 import {
+  deleteCharacterModel,
   pullAllCharDataModel,
   pullUserCharDataModel,
 } from "../models/API_calls";
@@ -9,8 +10,11 @@ import CharGridItem from "./CharGridItem";
 
 const CharGrid = () => {
   //context
-  const context = useContext(UserContext);
-  const user = context.user;
+  const userContext = useContext(UserContext);
+  const user = userContext.user;
+  const selectedCharacterContext = useContext(SelectedCharacterContext);
+  const selectedCharacter = selectedCharacterContext.selectedCharacter;
+  
 
   //types
   interface charDataType {
@@ -44,6 +48,9 @@ const CharGrid = () => {
 
   const deleteCharacter = async (event: React.MouseEvent<HTMLElement>) => {
     //grab selected char data and feed to model
+
+    const actual = await deleteCharacterModel(user, selectedCharacter._id);
+    console.log(actual)
   };
 
   return (

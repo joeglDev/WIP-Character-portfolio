@@ -27,13 +27,21 @@ export const registrationModel = async (username: string, password: string) => {
 export const pullAllCharDataModel = async () => {
   const rawResponse = await fetch("http://localhost:9124/characters");
   const response = await rawResponse.json();
-  return response
-  };
-  
- 
+  return response;
+};
 
 export const pullUserCharDataModel = async (username: string) => {
-  const rawResponse = await fetch(`http://localhost:9124/characters/${username}`);
+  const rawResponse = await fetch(
+    `http://localhost:9124/characters/${username}`
+  );
   const response = await rawResponse.json();
-  return response
+  return response;
+};
+
+export const deleteCharacterModel = async (username: string, id: string) => {
+  const rawResponse = await fetch(`http://localhost:9124/characters/${username}/${id}`, {
+    method: "DELETE",
+  });
+  const response = await rawResponse.json();
+  return response;
 };
