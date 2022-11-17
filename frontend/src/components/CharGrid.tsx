@@ -15,7 +15,6 @@ const CharGrid = () => {
   const selectedCharacterContext = useContext(SelectedCharacterContext);
   const selectedCharacter = selectedCharacterContext.selectedCharacter;
   const setSelectedCharacter = selectedCharacterContext.setSelectedCharacter;
- 
 
   //types
   interface charDataType {
@@ -48,8 +47,6 @@ const CharGrid = () => {
   };
 
   const deleteCharacter = async (event: React.MouseEvent<HTMLElement>) => {
-    //grab selected char data and feed to model
-
     const actual = await deleteCharacterModel(user, selectedCharacter._id);
     //if char deleted successfully then optimistically render in
     //remove del character from state
@@ -60,12 +57,7 @@ const CharGrid = () => {
         }
       });
       setCharData(newCharData);
-
-      //remove char from selected character -> note improve this
-      setSelectedCharacter(undefined)
-      
-
-
+      setSelectedCharacter(undefined);
     }
   };
 
