@@ -14,7 +14,8 @@ const CharGrid = () => {
   const user = userContext.user;
   const selectedCharacterContext = useContext(SelectedCharacterContext);
   const selectedCharacter = selectedCharacterContext.selectedCharacter;
-  
+  const setSelectedCharacter = selectedCharacterContext.setSelectedCharacter;
+ 
 
   //types
   interface charDataType {
@@ -50,7 +51,22 @@ const CharGrid = () => {
     //grab selected char data and feed to model
 
     const actual = await deleteCharacterModel(user, selectedCharacter._id);
-    console.log(actual)
+    //if char deleted successfully then optimistically render in
+    //remove del character from state
+    if (!actual.invalid_character) {
+      const newCharData = charData.filter((char) => {
+        if (char._id !== selectedCharacter._id) {
+          return char;
+        }
+      });
+      setCharData(newCharData);
+
+      //remove char from selected character -> note improve this
+      setSelectedCharacter(undefined)
+      
+
+
+    }
   };
 
   return (
