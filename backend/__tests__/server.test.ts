@@ -322,7 +322,7 @@ describe("can delete an existing character", () => {
   });
 });
 
-describe("update existing character", () => {
+describe.only("update existing character", () => {
   let id: string;
   const updateBody = {
     ownerUsername: "test1",

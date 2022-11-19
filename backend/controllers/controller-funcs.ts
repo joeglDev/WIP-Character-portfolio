@@ -8,6 +8,7 @@ import {
   writeNewUserCharacter,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
+import { charData } from "../typesAndInterfaces";
 
 //objects
 interface loginResponseObject {
@@ -117,16 +118,21 @@ export const controllerDelUserCharacter = async (
 export const patchCharacter = async (req: Request, res: Response,  next: NextFunction) => {
   try {
     const id = req.params.id;
-    const data = req.body;
+    const data : charData = req.body;
+    console.log("data", data)
     //reject request body for update if does not have key keys
+    
+    /*
     if (data.hasOwnProperty("name") === false || data.hasOwnProperty("ownerUsername") === false) {
       throw Error("400- invalid character update request body")
     }
+    */
     
     const patchedCharacter = await updateCharacter(id, data);
     const responseBody = { updated_character: patchedCharacter };
     res.status(200).send(responseBody);
   } catch (err) {
+    console.log(err)
     next(err);
   }
 };
