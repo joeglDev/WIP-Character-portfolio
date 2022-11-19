@@ -4,7 +4,6 @@ import { db } from "../db/connection";
 //this needs to be defined from a connection
 import bcrypt from "bcrypt";
 import { saltRounds } from "../exports";
-import charsData from "../db/data/test/chars";
 import { doesUserExist } from "./utils";
 
 const users = db.collection("users");
