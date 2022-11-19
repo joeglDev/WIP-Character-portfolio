@@ -123,7 +123,6 @@ export const patchCharacter = async (
   try {
     const id = req.params.id;
     const data: charData = req.body;
-    console.log("data", data);
     //reject request body for update if does not have key keys
     if (
       data.hasOwnProperty("name") === false ||
