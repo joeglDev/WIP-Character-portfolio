@@ -186,7 +186,7 @@ h2.chargrid__header {
     bottom: 65%;
   }
 
-  
+
 
 }
 
@@ -195,7 +195,7 @@ h2.chargrid__header {
   display: grid;
   gap: 2rem;
   grid-template-columns: auto auto auto;
-margin-left: 3rem;
+  margin-left: 3rem;
 
 }
 
@@ -203,7 +203,7 @@ margin-left: 3rem;
   width: 25rem;
   height: 25rem;
   text-align: center;
-padding-left: 0.8rem;
+  padding-left: 0.8rem;
 
 }
 
@@ -229,24 +229,49 @@ padding-left: 0.8rem;
 }
 
 @media only screen and (max-width: 600px) {
-.charGrid__details {
-  display: grid;
-  gap: 1%;
-  grid-template-columns: 100%;
-  margin: auto;
- 
+  .charGrid__details {
+    display: grid;
+    gap: 1%;
+    grid-template-columns: 100%;
+    margin: auto;
 
-}
 
-.charGrid__details__item img {
-  margin: auto;
-  width: 15rem;
-  height: 15rem;
-  overflow: hidden;
-}
+  }
+
+  .charGrid__details__item img {
+    margin: auto;
+    width: 15rem;
+    height: 15rem;
+    overflow: hidden;
+  }
 }
 
 /* Upload new character form */
 .UploadCharacterForm__section {
   text-align: center;
+}
+
+.UploadCharacterForm__form {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: auto auto auto auto;
+
+}
+
+.last {
+  margin-bottom: 2rem;
+}
+
+.UploadCharacterForm__form__item {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  width: 90%;
+}
+
+@media only screen and (max-width: 600px) {
+  .UploadCharacterForm__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

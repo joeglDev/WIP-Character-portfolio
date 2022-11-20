@@ -96,7 +96,7 @@ const CharGrid = () => {
           aria-label="upload a new character"
           onClick={displayUploadCharacter}
         >
-          Upload a new character
+          Open form to add a new character
         </button>
       </form>
       <UploadCharacterForm isOpen={displayUploadCharacterForm}></UploadCharacterForm>
