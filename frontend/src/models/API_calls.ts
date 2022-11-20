@@ -45,3 +45,16 @@ export const deleteCharacterModel = async (username: string, id: string) => {
   const response = await rawResponse.json();
   return response;
 };
+
+export const uploadNewCharacter = async (username: string, characterObject : any)  => {
+  const rawResponse = await fetch(`http://localhost:9124/characters/${username}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(characterObject),
+  });
+  const response = await rawResponse.json();
+  console.log(response, response.character_created)
+  return response;
+}

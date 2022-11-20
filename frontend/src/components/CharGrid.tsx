@@ -99,7 +99,7 @@ const CharGrid = () => {
           Open form to add a new character
         </button>
       </form>
-      <UploadCharacterForm isOpen={displayUploadCharacterForm}></UploadCharacterForm>
+      <UploadCharacterForm isOpen={displayUploadCharacterForm} setCharData={setCharData}></UploadCharacterForm>
       <CharDetails></CharDetails>
       <ul className="charGrid__grid">
         {Array.isArray(charData)

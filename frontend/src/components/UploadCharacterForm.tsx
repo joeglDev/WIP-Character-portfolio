@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../App";
+import { uploadNewCharacter } from "../models/API_calls";
 
-export const UploadCharacterForm = ({ isOpen }: any) => {
+export const UploadCharacterForm = ({ isOpen, setCharData }: any) => {
   //context
   const userContext = useContext(UserContext);
   const user = userContext.user;
@@ -50,7 +51,7 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
     setAllignment(target.value);
   };
 
-  const handleFormSubmission = (event: React.MouseEvent<HTMLElement>) => {
+  const handleFormSubmission = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
     const newCharacter = {
       new_character: {
@@ -65,7 +66,9 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
         bio: bio,
       },
     };
-    console.log("new char obj", newCharacter);
+    const response = await uploadNewCharacter(user, newCharacter);
+    console.log(response)
+    //setCharData(response.character_created)
   };
 
   if (isOpen && user !== "Please sign in ->") {

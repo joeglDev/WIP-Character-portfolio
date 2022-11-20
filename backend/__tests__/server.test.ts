@@ -238,6 +238,7 @@ describe("post a new character", () => {
       .send(testBody)
       .expect(201)
       .then(({ body }: any) => {
+        console.log(body)
         expect(body.character_created).toEqual(
           expect.objectContaining({
             _id: expect.any(String),

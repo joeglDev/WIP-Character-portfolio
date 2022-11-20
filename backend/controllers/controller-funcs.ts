@@ -85,7 +85,9 @@ export const postNewUserCharacter = async (
   const newCharacter = req.body.new_character;
   try {
     const modelWrite = await writeNewUserCharacter(username, newCharacter);
+   // console.log(modelWrite)
     const responseBody = { character_created: modelWrite[0] };
+   // console.log(responseBody)
     res.status(201).send(responseBody);
   } catch (err) {
     next(err);
