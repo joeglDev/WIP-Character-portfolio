@@ -164,6 +164,11 @@ h2.chargrid__header {
     margin: auto;
   }
 
+  .chargrid__form {
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .charGrid__grid__item img {
     height: 15rem;
     width: 15rem;
@@ -239,4 +244,9 @@ padding-left: 0.8rem;
   height: 15rem;
   overflow: hidden;
 }
+}
+
+/* Upload new character form */
+.UploadCharacterForm__section {
+  text-align: center;
 }

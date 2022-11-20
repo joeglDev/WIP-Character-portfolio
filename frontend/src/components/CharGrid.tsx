@@ -8,6 +8,7 @@ import {
 import CharDetails from "./CharDetails";
 import CharGridItem from "./CharGridItem";
 import { charData } from "../../../backend/typesAndInterfaces";
+import { UploadCharacterForm } from "./UploadCharacterForm";
 
 const CharGrid = () => {
   //context
@@ -24,6 +25,7 @@ const CharGrid = () => {
 
   //states
   const [charData, setCharData] = useState<charDataType[]>([]);
+  const [displayUploadCharacterForm, setDisplayUploadCharacterForm] = useState(false);
 
   //button functions
   const pullAllCharData = async (event: React.MouseEvent<HTMLElement>) => {
@@ -51,12 +53,18 @@ const CharGrid = () => {
     }
   };
 
+  const displayUploadCharacter = (event: React.MouseEvent<HTMLElement>) => {
+    const currentState = displayUploadCharacterForm;
+    setDisplayUploadCharacterForm(!currentState);
+  };
+
   return (
     <section>
       <h1 className="chargrid__header">Welcome {user}</h1>
       <h2 className="chargrid__header">
         Click below to pull your characters ^w^
       </h2>
+      
       <form className="chargrid__form">
         <button
           className="chargrid__form__button"
@@ -82,7 +90,16 @@ const CharGrid = () => {
         >
           Delete selected character
         </button>
+        <button
+          className="chargrid__form__button"
+          type="button"
+          aria-label="upload a new character"
+          onClick={displayUploadCharacter}
+        >
+          Upload a new character
+        </button>
       </form>
+      <UploadCharacterForm isOpen={displayUploadCharacterForm}></UploadCharacterForm>
       <CharDetails></CharDetails>
       <ul className="charGrid__grid">
         {Array.isArray(charData)
