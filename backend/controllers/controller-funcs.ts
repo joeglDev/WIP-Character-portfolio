@@ -8,15 +8,7 @@ import {
   writeNewUserCharacter,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
-import { charData } from "../typesAndInterfaces";
-
-//objects
-interface loginResponseObject {
-  login_response: { username: string; outcome: string };
-}
-interface registationResponseObject {
-  registration_response: { username: string; msg: string };
-}
+import { charData, loginResponseObject, registationResponseObject } from "../typesAndInterfaces";
 
 export const postLogin = async (req: Request, res: Response) => {
   try {

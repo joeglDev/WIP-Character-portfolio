@@ -119,9 +119,7 @@ export const writeNewUserCharacter = async (
         const newChar = await chars.find({ name: "char_test_1" }).toArray();
         return newChar;
       }
-      //if not found return new err
     }
-    //const newUserCharacter = await chars.insertOne({});
   } catch (err) {}
 };
 
