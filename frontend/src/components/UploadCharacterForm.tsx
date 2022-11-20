@@ -67,8 +67,8 @@ export const UploadCharacterForm = ({ isOpen, setCharData }: any) => {
       },
     };
     const response = await uploadNewCharacter(user, newCharacter);
-    console.log(response)
-    //setCharData(response.character_created)
+    //this will need changing to response when server is fixed
+    //setCharData()
   };
 
   if (isOpen && user !== "Please sign in ->") {

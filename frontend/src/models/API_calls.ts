@@ -55,6 +55,5 @@ export const uploadNewCharacter = async (username: string, characterObject : any
     body: JSON.stringify(characterObject),
   });
   const response = await rawResponse.json();
-  console.log(response, response.character_created)
   return response;
 }
