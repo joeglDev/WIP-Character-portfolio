@@ -56,7 +56,7 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
       new_character: {
         ownerUsername: user,
         name: name,
-        age: age,
+        age: age.toString(),
         species: species,
         gender: gender,
         sexuality: sexuality,
@@ -65,7 +65,7 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
         bio: bio,
       },
     };
-    console.log("new char obj", newCharacter)
+    console.log("new char obj", newCharacter);
   };
 
   if (isOpen && user !== "Please sign in ->") {
@@ -74,7 +74,6 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
         <h3>Upload a new Character</h3>
         <form className="UploadCharacterForm__form">
           <div className="UploadCharacterForm__form__item">
-            {" "}
             <label className="UploadCharacterForm__form__item" htmlFor="name">
               Name:
             </label>
@@ -87,7 +86,6 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
           </div>
 
           <div className="UploadCharacterForm__form__item">
-            {" "}
             <label className="UploadCharacterForm__form__item" htmlFor="age">
               Age:
             </label>
@@ -99,21 +97,25 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
             ></input>
           </div>
 
-          <div className="UploadCharacterForm__form__item">    
-            <label className="UploadCharacterForm__form__item" htmlFor="allignment">
+          <div className="UploadCharacterForm__form__item">
+            <label
+              className="UploadCharacterForm__form__item"
+              htmlFor="allignment"
+            >
               Allignment:
             </label>
-            <select  id="allignment" onChange={changeAllignment}>
-        <option value="Lawful Good">Lawful Good</option>
-        <option value="Neutral Good">Neutral Good</option>
-        <option value="Chaotic Good">Chaotic Good</option>
-        <option value="Lawful Neutral">Lawful Neutral</option>
-        <option value="True Neutral">True Neutral</option>
-        <option value="Chaotic Neutral">Chaotic Neutral</option>
-        <option value="Lawful Evil">Lawful Evil</option>
-        <option value="Neutral Evil">Neutral Evil</option>
-        <option value="Chaotic Evil">Chaotic Evil</option>
-    </select>
+            <select id="allignment" onChange={changeAllignment}>
+              <option value="default">Please pick one</option>
+              <option value="Lawful Good">Lawful Good</option>
+              <option value="Neutral Good">Neutral Good</option>
+              <option value="Chaotic Good">Chaotic Good</option>
+              <option value="Lawful Neutral">Lawful Neutral</option>
+              <option value="True Neutral">True Neutral</option>
+              <option value="Chaotic Neutral">Chaotic Neutral</option>
+              <option value="Lawful Evil">Lawful Evil</option>
+              <option value="Neutral Evil">Neutral Evil</option>
+              <option value="Chaotic Evil">Chaotic Evil</option>
+            </select>
           </div>
 
           <div className="UploadCharacterForm__form__item">
@@ -144,19 +146,37 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
           </div>
 
           <div className="UploadCharacterForm__form__item">
-          
             <label
               className="UploadCharacterForm__form__item"
               htmlFor="sexuality"
             >
-              Sexuality and Gender identity:
+              Sexuality:
             </label>
-            <input
-              className="UploadCharacterForm__form__item"
-              id="sexuality"
-              type="text"
-              onChange={changeSexuality}
-            ></input>
+            <input type="text" id="sexuality" onChange={changeSexuality}></input>{/* <input type="checkbox" id="lgbtq" value="lgbtq" onChange={changeIdentity}></input>
+            <label htmlFor="lgbtq">LGBTQ</label>
+            <input type="checkbox" id="bi" value="bi" onChange={changeIdentity}></input>
+            <label htmlFor="bi">Bisexual</label>
+            <input type="checkbox" id="pan" value="pan"></input>
+            <label htmlFor="pan">Pansexual</label>
+            <input type="checkbox" id="lesbian" value="lesbian"></input>
+            <label htmlFor="lesbian">Lesbian</label>
+            <input type="checkbox" id="msm" value="msm"></input>
+            <label htmlFor="msm">MSM</label>
+            <input type="checkbox" id="ace" value="ace"></input>
+            <label htmlFor="ace">Asexual</label>
+            <input type="checkbox" id="non-binary" value="non-binary"></input>
+            <label htmlFor="non-binary">non-binary</label>
+            <input type="checkbox" id="trans" value="trans"></input>
+            <label htmlFor="trans">Transgender</label>
+            <input type="checkbox" id="agender" value="agender"></input>
+            <label htmlFor="agender">Agender</label>
+            <input type="checkbox" id="genderfluid" value="genderfluid"></input>
+            <label htmlFor="genderfluid">Genderfluid</label>
+            <input type="checkbox" id="demiboy" value="demiboy"></input>
+            <label htmlFor="demiboy">Demiboy</label>
+            <input type="checkbox" id="demigirl" value="demigirl"></input>
+            <label htmlFor="demigirl">Demigirl</label>*/}
+            
           </div>
 
           <div className="UploadCharacterForm__form__item">
