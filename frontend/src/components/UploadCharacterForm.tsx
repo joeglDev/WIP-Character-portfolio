@@ -1,4 +1,10 @@
+import { useContext, useState } from "react";
+import { UserContext } from "../App";
+
 export const UploadCharacterForm = ({ isOpen }: any) => {
+  //context
+  const userContext = useContext(UserContext);
+  const user = userContext.user;
   //states
 
   //functions
@@ -12,7 +18,7 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
 
   const handleFormSubmission = (event: React.MouseEvent<HTMLElement>) => {};
 
-  if (isOpen) {
+  if (isOpen && user !== "Please sign in ->") {
     return (
       <section className="UploadCharacterForm__section">
         <h3>Upload a new Character</h3>
@@ -115,12 +121,14 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
               aria-label="upload a new character"
               onClick={handleFormSubmission}
             >
-              Open form to add a new character
+              Upload new character
             </button>
           </div>
         </form>
       </section>
     );
+  } else if (isOpen && user === "Please sign in ->") {
+    return <h3>Please login to upload characters</h3>;
   } else {
     return <></>;
   }
