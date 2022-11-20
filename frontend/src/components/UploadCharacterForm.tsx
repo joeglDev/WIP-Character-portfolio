@@ -6,17 +6,67 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
   const userContext = useContext(UserContext);
   const user = userContext.user;
   //states
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [species, setSpecies] = useState("");
+  const [gender, setGender] = useState("");
+  const [sexuality, setSexuality] = useState("");
+  const [imgURL, setImgURL] = useState("");
+  const [bio, setBio] = useState("");
+  const [allignment, setAllignment] = useState("");
 
   //functions
-  const changeName = () => {};
-  const changeAge = () => {};
-  const changeSpecies = () => {};
-  const changeGender = () => {};
-  const changeSexuality = () => {};
-  const changeImgURL = () => {};
-  const changeBio = () => {};
+  const changeName = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setName(target.value);
+  };
+  const changeAge = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setAge(target.value);
+  };
+  const changeSpecies = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setSpecies(target.value);
+  };
+  const changeGender = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setGender(target.value);
+  };
+  const changeSexuality = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setSexuality(target.value);
+  };
+  const changeImgURL = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setImgURL(target.value);
+  };
+  const changeBio = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setBio(target.value);
+  };
 
-  const handleFormSubmission = (event: React.MouseEvent<HTMLElement>) => {};
+  const changeAllignment = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLTextAreaElement;
+    setAllignment(target.value);
+  };
+
+  const handleFormSubmission = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    const newCharacter = {
+      new_character: {
+        ownerUsername: user,
+        name: name,
+        age: age,
+        species: species,
+        gender: gender,
+        sexuality: sexuality,
+        allignment: allignment,
+        imgURL: imgURL,
+        bio: bio,
+      },
+    };
+    console.log("new char obj", newCharacter)
+  };
 
   if (isOpen && user !== "Please sign in ->") {
     return (
@@ -49,6 +99,23 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
             ></input>
           </div>
 
+          <div className="UploadCharacterForm__form__item">    
+            <label className="UploadCharacterForm__form__item" htmlFor="allignment">
+              Allignment:
+            </label>
+            <select  id="allignment" onChange={changeAllignment}>
+        <option value="Lawful Good">Lawful Good</option>
+        <option value="Neutral Good">Neutral Good</option>
+        <option value="Chaotic Good">Chaotic Good</option>
+        <option value="Lawful Neutral">Lawful Neutral</option>
+        <option value="True Neutral">True Neutral</option>
+        <option value="Chaotic Neutral">Chaotic Neutral</option>
+        <option value="Lawful Evil">Lawful Evil</option>
+        <option value="Neutral Evil">Neutral Evil</option>
+        <option value="Chaotic Evil">Chaotic Evil</option>
+    </select>
+          </div>
+
           <div className="UploadCharacterForm__form__item">
             <label
               className="UploadCharacterForm__form__item"
@@ -77,12 +144,12 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
           </div>
 
           <div className="UploadCharacterForm__form__item">
-            {" "}
+          
             <label
               className="UploadCharacterForm__form__item"
               htmlFor="sexuality"
             >
-              Sexuality:
+              Sexuality and Gender identity:
             </label>
             <input
               className="UploadCharacterForm__form__item"
