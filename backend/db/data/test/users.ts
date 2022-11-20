@@ -1,8 +1,5 @@
-//may want to add an incrementing id number
-interface userData {
-    username: string,
-    password: string,
-};
+import {userData} from "../../../typesAndInterfaces";
+
 
 interface usersData extends Array<userData>{}
 

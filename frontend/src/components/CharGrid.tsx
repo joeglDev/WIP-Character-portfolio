@@ -7,7 +7,7 @@ import {
 } from "../models/API_calls";
 import CharDetails from "./CharDetails";
 import CharGridItem from "./CharGridItem";
-import {charData} from "../../../backend/typesAndInterfaces";
+import { charData } from "../../../backend/typesAndInterfaces";
 
 const CharGrid = () => {
   //context
