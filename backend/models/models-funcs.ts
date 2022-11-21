@@ -119,8 +119,6 @@ export const writeNewUserCharacter = async (
       } else {
         //if insert successful
         const newCharInsert = (await chars.insertOne(newCharacter));
-
-        console.log("insert", newCharInsert);
         if (
           newCharInsert.acknowledged === true &&
           newCharInsert.hasOwnProperty("insertedId")

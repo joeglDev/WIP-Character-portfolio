@@ -1,11 +1,15 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../App";
+import { UserContext, SelectedCharacterContext } from "../App";
 import { uploadNewCharacter } from "../models/API_calls";
 
-export const UploadCharacterForm = ({ isOpen, setCharData }: any) => {
+export const UploadCharacterForm = ({ isOpen }: any) => {
   //context
   const userContext = useContext(UserContext);
   const user = userContext.user;
+
+  const selectedCharacterContext = useContext(SelectedCharacterContext);
+  const selectedCharacter = selectedCharacterContext.selectedCharacter;
+  const setSelectedCharacter = selectedCharacterContext.setSelectedCharacter;
   //states
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
@@ -67,8 +71,11 @@ export const UploadCharacterForm = ({ isOpen, setCharData }: any) => {
       },
     };
     const response = await uploadNewCharacter(user, newCharacter);
-    //this will need changing to response when server is fixed
-    //setCharData()
+    //renders new character created in character details grid
+    //to allow render to grid grid charData will need to be extracted out to a context
+    if (response.character_created) {
+      setSelectedCharacter(response.character_created);
+    }
   };
 
   if (isOpen && user !== "Please sign in ->") {
@@ -155,7 +162,12 @@ export const UploadCharacterForm = ({ isOpen, setCharData }: any) => {
             >
               Sexuality:
             </label>
-            <input type="text" id="sexuality" onChange={changeSexuality}></input>{/* <input type="checkbox" id="lgbtq" value="lgbtq" onChange={changeIdentity}></input>
+            <input
+              type="text"
+              id="sexuality"
+              onChange={changeSexuality}
+            ></input>
+            {/* <input type="checkbox" id="lgbtq" value="lgbtq" onChange={changeIdentity}></input>
             <label htmlFor="lgbtq">LGBTQ</label>
             <input type="checkbox" id="bi" value="bi" onChange={changeIdentity}></input>
             <label htmlFor="bi">Bisexual</label>
@@ -179,7 +191,6 @@ export const UploadCharacterForm = ({ isOpen, setCharData }: any) => {
             <label htmlFor="demiboy">Demiboy</label>
             <input type="checkbox" id="demigirl" value="demigirl"></input>
             <label htmlFor="demigirl">Demigirl</label>*/}
-            
           </div>
 
           <div className="UploadCharacterForm__form__item">
