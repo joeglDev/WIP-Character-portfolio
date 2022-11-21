@@ -143,7 +143,7 @@ describe("get char data", () => {
   });
 });
 
-describe.only("post a new character", () => {
+describe("post a new character", () => {
   test("400- empty request body", () => {
     const emptyBody = { new_character: {} };
     return request(app)
