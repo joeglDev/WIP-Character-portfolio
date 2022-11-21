@@ -75,8 +75,10 @@ export const selectUserCharacters = async (username: string) => {
   return charData;
 };
 
-//improvement use a util func to check user exists
-//also only render post char on front end if logged in
+//returns newly inserted character if
+//has name and ownerUsername properties
+// ownerUsername is a registered user
+//insert is successful
 export const writeNewUserCharacter = async (
   username: string,
   newCharacter: any
@@ -115,9 +117,17 @@ export const writeNewUserCharacter = async (
           msg: "404-user not found",
         });
       } else {
-        const newCharInsert = await chars.insertOne(newCharacter);
-        const newChar = await chars.find({ name: "char_test_1" }).toArray();
-        return newChar;
+        //if insert successful
+        const newCharInsert = (await chars.insertOne(newCharacter));
+
+        console.log("insert", newCharInsert);
+        if (
+          newCharInsert.acknowledged === true &&
+          newCharInsert.hasOwnProperty("insertedId")
+        ) {
+          const newChar = await chars.findOne({_id: newCharInsert.insertedId});
+          return newChar;
+        }
       }
     }
   } catch (err) {}
@@ -152,7 +162,7 @@ export const updateCharacter = async (id: string, data: any) => {
     }
 
     const update = await chars.update({ _id: ObjectID(id) }, { $set: data });
-    const changedValue = await await chars.findOne(ObjectID(id));
+    const changedValue = await chars.findOne(ObjectID(id));
     if (update.acknowledged === true && update.modifiedCount === 1) {
       return changedValue;
     }
