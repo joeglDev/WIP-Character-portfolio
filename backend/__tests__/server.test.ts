@@ -143,7 +143,7 @@ describe("get char data", () => {
   });
 });
 
-describe("post a new character", () => {
+describe.only("post a new character", () => {
   test("400- empty request body", () => {
     const emptyBody = { new_character: {} };
     return request(app)
@@ -238,7 +238,6 @@ describe("post a new character", () => {
       .send(testBody)
       .expect(201)
       .then(({ body }: any) => {
-        console.log(body)
         expect(body.character_created).toEqual(
           expect.objectContaining({
             _id: expect.any(String),
