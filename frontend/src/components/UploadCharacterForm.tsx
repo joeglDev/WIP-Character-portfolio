@@ -81,6 +81,9 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
       //to allow render to grid grid charData will need to be extracted out to a context
       if (response.character_created) {
         setSelectedCharacter(response.character_created);
+        setInvalidName("valid");
+      } else {
+        setInvalidName("invalid");
       }
     }
   };
@@ -89,6 +92,11 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
     return (
       <section className="UploadCharacterForm__section">
         <h3>Upload a new Character</h3>
+        <p className={invalidName === "valid" ? "visible" : "not_visible"}>New character successfully uploaded.</p>
+        <p className={invalidName === "invalid" ? "visible" : "not_visible"}>
+          Failed to upload new character; please check that a valid name has
+          been entered.
+        </p>
         <form className="UploadCharacterForm__form">
           <div className="UploadCharacterForm__form__item">
             <label className="UploadCharacterForm__form__item" htmlFor="name">
