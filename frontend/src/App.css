@@ -236,6 +236,8 @@ h2.chargrid__header {
   right: 30%;
 }
 
+.charGrid__details__title {margin-right: 1rem;}
+
 @media only screen and (max-width: 600px) {
   .charGrid__details {
     display: grid;
