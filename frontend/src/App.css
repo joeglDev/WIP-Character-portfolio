@@ -21,7 +21,7 @@ header.header_auth {
 
 .current_user {
   display: relative;
-  max-width: 10%;
+  max-width: 20%;
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 0.5rem;
@@ -77,12 +77,20 @@ header.header_auth {
 
 @media only screen and (max-width: 600px) {
   .login_item {
-    font-size: 1.8vi;
+    font-size: 4vi;
     margin: 1vi;
+    text-align: center;
   }
 
   .current_user {
-    font-size: 2vi;
+    font-size: 4vi;
+    margin: auto;
+    
+  }
+
+  .header_form {
+    flex-direction: column;
+    justify-content: center;
   }
 
   /*  CharGrid  */
@@ -164,6 +172,11 @@ h2.chargrid__header {
     margin: auto;
   }
 
+  .chargrid__form {
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .charGrid__grid__item img {
     height: 15rem;
     width: 15rem;
@@ -181,7 +194,7 @@ h2.chargrid__header {
     bottom: 65%;
   }
 
-  
+
 
 }
 
@@ -190,7 +203,7 @@ h2.chargrid__header {
   display: grid;
   gap: 2rem;
   grid-template-columns: auto auto auto;
-margin-left: 3rem;
+  margin-left: 3rem;
 
 }
 
@@ -198,7 +211,7 @@ margin-left: 3rem;
   width: 25rem;
   height: 25rem;
   text-align: center;
-padding-left: 0.8rem;
+  padding-left: 0.8rem;
 
 }
 
@@ -223,20 +236,61 @@ padding-left: 0.8rem;
   right: 30%;
 }
 
+.charGrid__details__title {margin-right: 1rem;}
+
 @media only screen and (max-width: 600px) {
-.charGrid__details {
+  .charGrid__details {
+    display: grid;
+    gap: 1%;
+    grid-template-columns: 100%;
+    margin: auto;
+
+
+  }
+
+  .charGrid__details__item img {
+    margin: auto;
+    width: 15rem;
+    height: 15rem;
+    overflow: hidden;
+  }
+}
+
+/* Upload new character form */
+.UploadCharacterForm__section {
+  text-align: center;
+}
+
+.UploadCharacterForm__form {
   display: grid;
-  gap: 1%;
-  grid-template-columns: 100%;
-  margin: auto;
- 
+  gap: 2rem;
+  grid-template-columns: auto auto auto auto;
 
 }
 
-.charGrid__details__item img {
-  margin: auto;
-  width: 15rem;
-  height: 15rem;
-  overflow: hidden;
+.btn {
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.UploadCharacterForm__form__item {
+  
+  width: 90%;
+}
+
+.UploadCharacterForm__form__item input {
+min-width: 90%;
+}
+
+.UploadCharacterForm__form__item select {
+  min-width: 90%;
+  }
+
+@media only screen and (max-width: 600px) {
+  .UploadCharacterForm__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

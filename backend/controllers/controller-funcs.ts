@@ -8,14 +8,7 @@ import {
   writeNewUserCharacter,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
-
-//objects
-interface loginResponseObject {
-  login_response: { username: string; outcome: string };
-}
-interface registationResponseObject {
-  registration_response: { username: string; msg: string };
-}
+import { charData, loginResponseObject, registationResponseObject } from "../typesAndInterfaces";
 
 export const postLogin = async (req: Request, res: Response) => {
   try {
@@ -91,8 +84,8 @@ export const postNewUserCharacter = async (
   const username = req.params.username;
   const newCharacter = req.body.new_character;
   try {
-    const modelWrite = await writeNewUserCharacter(username, newCharacter);
-    const responseBody = { character_created: modelWrite[0] };
+    const modelResponse = await writeNewUserCharacter(username, newCharacter);
+    const responseBody = { character_created: modelResponse };
     res.status(201).send(responseBody);
   } catch (err) {
     next(err);
@@ -114,19 +107,36 @@ export const controllerDelUserCharacter = async (
   }
 };
 
-export const patchCharacter = async (req: Request, res: Response,  next: NextFunction) => {
+export const patchCharacter = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const id = req.params.id;
-    const data = req.body;
+    const data: charData = req.body;
     //reject request body for update if does not have key keys
-    if (data.hasOwnProperty("name") === false || data.hasOwnProperty("ownerUsername") === false) {
-      throw Error("400- invalid character update request body")
+    if (
+      data.hasOwnProperty("name") === false ||
+      data.hasOwnProperty("ownerUsername") === false ||
+      data.hasOwnProperty("age") === false ||
+      data.hasOwnProperty("species") === false ||
+      data.hasOwnProperty("gender") === false ||
+      data.hasOwnProperty("sexuality") === false ||
+      data.hasOwnProperty("allignment") === false ||
+      data.hasOwnProperty("height") === false ||
+      data.hasOwnProperty("weight") === false ||
+      data.hasOwnProperty("imgURL") === false ||
+      data.hasOwnProperty("bio") === false
+    ) {
+      throw Error("400- invalid character update request body");
+    } else {
+      const patchedCharacter = await updateCharacter(id, data);
+      const responseBody = { updated_character: patchedCharacter };
+      res.status(200).send(responseBody);
     }
-    
-    const patchedCharacter = await updateCharacter(id, data);
-    const responseBody = { updated_character: patchedCharacter };
-    res.status(200).send(responseBody);
   } catch (err) {
+    console.log(err);
     next(err);
   }
 };
