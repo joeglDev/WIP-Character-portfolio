@@ -8,7 +8,6 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
   const user = userContext.user;
 
   const selectedCharacterContext = useContext(SelectedCharacterContext);
-  const selectedCharacter = selectedCharacterContext.selectedCharacter;
   const setSelectedCharacter = selectedCharacterContext.setSelectedCharacter;
   //states
   const [name, setName] = useState("");
@@ -215,7 +214,9 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
               onChange={changeBio}
             ></textarea>
           </div>
-          <div className={"UploadCharacterForm__form__item" + " last"}>
+          
+        </form>
+        <div className={"UploadCharacterForm__form__item" + " btn"}>
             <button
               className="chargrid__form__button"
               type="button"
@@ -225,7 +226,6 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
               Upload new character
             </button>
           </div>
-        </form>
       </section>
     );
   } else if (isOpen && user === "Please sign in ->") {

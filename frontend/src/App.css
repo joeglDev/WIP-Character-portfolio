@@ -21,7 +21,7 @@ header.header_auth {
 
 .current_user {
   display: relative;
-  max-width: 10%;
+  max-width: 20%;
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 0.5rem;
@@ -77,12 +77,20 @@ header.header_auth {
 
 @media only screen and (max-width: 600px) {
   .login_item {
-    font-size: 1.8vi;
+    font-size: 4vi;
     margin: 1vi;
+    text-align: center;
   }
 
   .current_user {
-    font-size: 2vi;
+    font-size: 4vi;
+    margin: auto;
+    
+  }
+
+  .header_form {
+    flex-direction: column;
+    justify-content: center;
   }
 
   /*  CharGrid  */
@@ -258,15 +266,24 @@ h2.chargrid__header {
 
 }
 
-.last {
+.btn {
   margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .UploadCharacterForm__form__item {
-  margin-right: 1rem;
-  margin-left: 1rem;
+  
   width: 90%;
 }
+
+.UploadCharacterForm__form__item input {
+min-width: 90%;
+}
+
+.UploadCharacterForm__form__item select {
+  min-width: 90%;
+  }
 
 @media only screen and (max-width: 600px) {
   .UploadCharacterForm__form {
