@@ -25,7 +25,9 @@ const CharGrid = () => {
 
   //states
   const [charData, setCharData] = useState<charDataType[]>([]);
-  const [displayUploadCharacterForm, setDisplayUploadCharacterForm] = useState(false);
+  const [displayUploadCharacterForm, setDisplayUploadCharacterForm] =
+    useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   //button functions
   const pullAllCharData = async (event: React.MouseEvent<HTMLElement>) => {
@@ -39,17 +41,23 @@ const CharGrid = () => {
   };
 
   const deleteCharacter = async (event: React.MouseEvent<HTMLElement>) => {
-    const actual = await deleteCharacterModel(user, selectedCharacter._id);
-    //if char deleted successfully then optimistically render in
-    //remove del character from state
-    if (!actual.invalid_character) {
-      const newCharData = charData.filter((char) => {
-        if (char._id !== selectedCharacter._id) {
-          return char;
-        }
-      });
-      setCharData(newCharData);
-      setSelectedCharacter(undefined);
+    //prevent del if user does not equal characters owner
+    if (user !== selectedCharacter.ownerUsername) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+      const actual = await deleteCharacterModel(user, selectedCharacter._id);
+      //if char deleted successfully then optimistically render in
+      //remove del character from state
+      if (!actual.invalid_character) {
+        const newCharData = charData.filter((char) => {
+          if (char._id !== selectedCharacter._id) {
+            return char;
+          }
+        });
+        setCharData(newCharData);
+        setSelectedCharacter(undefined);
+      }
     }
   };
 
@@ -64,7 +72,7 @@ const CharGrid = () => {
       <h2 className="chargrid__header">
         Click below to pull your characters ^w^
       </h2>
-      
+    <p className={isVisible ? "visible" : "not_visible"}>You cannot delete a character that is not yours.</p>
       <form className="chargrid__form">
         <button
           className="chargrid__form__button"
@@ -99,7 +107,9 @@ const CharGrid = () => {
           Open form to add a new character
         </button>
       </form>
-      <UploadCharacterForm isOpen={displayUploadCharacterForm}></UploadCharacterForm>
+      <UploadCharacterForm
+        isOpen={displayUploadCharacterForm}
+      ></UploadCharacterForm>
       <CharDetails></CharDetails>
       <ul className="charGrid__grid">
         {Array.isArray(charData)

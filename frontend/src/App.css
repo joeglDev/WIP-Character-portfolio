@@ -69,6 +69,7 @@ header.header_auth {
 
 .visible {
   display: inline-block;
+  text-align: center;
 }
 
 .not_visible {
