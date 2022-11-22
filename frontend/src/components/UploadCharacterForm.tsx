@@ -18,6 +18,8 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
   const [imgURL, setImgURL] = useState("");
   const [bio, setBio] = useState("");
   const [allignment, setAllignment] = useState("");
+  //css states
+  const [invalidName, setInvalidName] = useState("");
 
   //functions
   const changeName = (event: React.ChangeEvent) => {
@@ -56,24 +58,30 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
 
   const handleFormSubmission = async (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    const newCharacter = {
-      new_character: {
-        ownerUsername: user,
-        name: name,
-        age: age.toString(),
-        species: species,
-        gender: gender,
-        sexuality: sexuality,
-        allignment: allignment,
-        imgURL: imgURL,
-        bio: bio,
-      },
-    };
-    const response = await uploadNewCharacter(user, newCharacter);
-    //renders new character created in character details grid
-    //to allow render to grid grid charData will need to be extracted out to a context
-    if (response.character_created) {
-      setSelectedCharacter(response.character_created);
+    //if name is empty set css for name input red else set green
+    if (name === "" || name === undefined || name === null) {
+      setInvalidName("invalid");
+    } else {
+      setInvalidName("valid");
+      const newCharacter = {
+        new_character: {
+          ownerUsername: user,
+          name: name,
+          age: age.toString(),
+          species: species,
+          gender: gender,
+          sexuality: sexuality,
+          allignment: allignment,
+          imgURL: imgURL,
+          bio: bio,
+        },
+      };
+      const response = await uploadNewCharacter(user, newCharacter);
+      //renders new character created in character details grid
+      //to allow render to grid grid charData will need to be extracted out to a context
+      if (response.character_created) {
+        setSelectedCharacter(response.character_created);
+      }
     }
   };
 
@@ -87,7 +95,14 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
               Name:
             </label>
             <input
-              className="UploadCharacterForm__form__item"
+              className={
+                "UploadCharacterForm__form__item " +
+                (invalidName === ""
+                  ? ""
+                  : invalidName === "valid"
+                  ? "login_item_valid"
+                  : "login_item_invalid")
+              }
               id="name"
               type="text"
               onChange={changeName}
@@ -214,18 +229,17 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
               onChange={changeBio}
             ></textarea>
           </div>
-          
         </form>
         <div className={"UploadCharacterForm__form__item" + " btn"}>
-            <button
-              className="chargrid__form__button"
-              type="button"
-              aria-label="upload a new character"
-              onClick={handleFormSubmission}
-            >
-              Upload new character
-            </button>
-          </div>
+          <button
+            className="chargrid__form__button"
+            type="button"
+            aria-label="upload a new character"
+            onClick={handleFormSubmission}
+          >
+            Upload new character
+          </button>
+        </div>
       </section>
     );
   } else if (isOpen && user === "Please sign in ->") {
