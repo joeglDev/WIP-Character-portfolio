@@ -92,7 +92,9 @@ export const UploadCharacterForm = ({ isOpen }: any) => {
     return (
       <section className="UploadCharacterForm__section">
         <h3>Upload a new Character</h3>
-        <p className={invalidName === "valid" ? "visible" : "not_visible"}>New character successfully uploaded.</p>
+        <p className={invalidName === "valid" ? "visible" : "not_visible"}>
+          New character successfully uploaded.
+        </p>
         <p className={invalidName === "invalid" ? "visible" : "not_visible"}>
           Failed to upload new character; please check that a valid name has
           been entered.
