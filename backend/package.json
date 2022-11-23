@@ -6,7 +6,7 @@
   "scripts": {
     "test": "tsc && jest server.test.js",
     "seed-test": "tsc && ts-node db/seeds/seed-test.js",
-    "start": "server.js",
+    "start": "tsc && server.js",
     "seedandtest": "npm run seed-test && npm run test",
     "seed:prod": "NODE_ENV=production  npm run seed-test"
   },
