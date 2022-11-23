@@ -115,7 +115,7 @@ export const apiData = [
     },
   },
   {
-    ENDPOINT: "POST /characters/:username/:id",
+    ENDPOINT: "PATCH /characters/:username/:id",
     REQUEST: {
       ownerUsername: "STRING",
       name: "STRING",
