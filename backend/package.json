@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index",
-  "engines": {"node": "18.3.0"},
   "scripts": {
     "test": "tsc && jest server.test.js",
     "seed-test": "tsc && ts-node db/seeds/seed-test.js",
