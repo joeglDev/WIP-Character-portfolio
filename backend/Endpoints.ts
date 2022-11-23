@@ -1,4 +1,5 @@
 class Endpoints {
+  static route: string = "/";
   static login: string = "/login";
   static register: string = "/register";
   static invalidEnd: string = "*";

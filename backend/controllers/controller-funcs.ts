@@ -8,7 +8,17 @@ import {
   writeNewUserCharacter,
 } from "../models/models-funcs";
 import { Request, Response, NextFunction } from "express";
-import { charData, loginResponseObject, registationResponseObject } from "../typesAndInterfaces";
+import {
+  charData,
+  loginResponseObject,
+  registationResponseObject,
+} from "../typesAndInterfaces";
+import { apiData } from "../apiDocumentation";
+
+export const getRoute = (req: Request, res: Response) => {
+  const responseBody = { api_documentation: apiData };
+  res.status(200).send(responseBody);
+};
 
 export const postLogin = async (req: Request, res: Response) => {
   try {

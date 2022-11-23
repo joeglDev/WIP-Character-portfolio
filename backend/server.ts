@@ -1,7 +1,7 @@
 //import express = require("express");
 import express from "express";
 import cors from "cors";
-import { controllerDelUserCharacter, getAllChars, getUserChars, patchCharacter, postLogin, postNewUser, postNewUserCharacter } from "./controllers/controller-funcs";
+import { controllerDelUserCharacter, getAllChars, getRoute, getUserChars, patchCharacter, postLogin, postNewUser, postNewUserCharacter } from "./controllers/controller-funcs";
 import Endpoints from "./Endpoints";
 import { handleCustomErrors, handleInvalidPaths } from "./errors";
 
@@ -17,6 +17,7 @@ app.use(
 app.use(express.json());
 
 //paths
+app.get(Endpoints.route, getRoute)
 app.post(Endpoints.login, postLogin);
 app.post(Endpoints.register, postNewUser);
 app.get(Endpoints.charactersEnd, getAllChars);

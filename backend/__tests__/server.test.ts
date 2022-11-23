@@ -3,6 +3,7 @@ import { client } from "../db/connection";
 import { seed } from "../db/seeds/seed-test";
 import app from "../server";
 import Endpoints from "../Endpoints";
+import { apiData } from "../apiDocumentation";
 
 /*
 beforeAll(() => {
@@ -280,7 +281,6 @@ describe("can delete an existing character", () => {
       .send(testBody)
       .then(({ body }: any) => {
         const charToDelete = body.character_created._id;
-        console.log(charToDelete);
         return request(app)
           .delete(`/characters/test1/${charToDelete}`)
           .expect(200)
@@ -399,6 +399,17 @@ describe("update existing character", () => {
             status: expect.any(Number),
           })
         );
+      });
+  });
+});
+
+describe("route", () => {
+  test("200- returns API documentation", () => {
+    return request(app)
+      .get(Endpoints.route)
+      .expect(200)
+      .then(({ body }: any) => {
+        expect(body.api_documentation).toEqual(apiData);
       });
   });
 });
