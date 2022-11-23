@@ -6,7 +6,9 @@ import Endpoints from "./Endpoints";
 import { handleCustomErrors, handleInvalidPaths } from "./errors";
 
 const app = express();
-const port = 9124 || process.env.PORT;//const {port = 9124} = process.env; 
+//const {port = 9124} = process.env.PORT; 
+const port: string|number =  process.env.PORT || 9124 ;
+
 
 //middleware
 app.use(
@@ -31,7 +33,7 @@ app.get(Endpoints.invalidEnd, handleInvalidPaths);
 app.use(handleCustomErrors);
 
 //listen
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, () => {
   console.log(`Server listening on port ${port}.`);
 });
 
