@@ -4,7 +4,7 @@
   "description": "",
   "main": "index",
   "scripts": {
-    "test": "tsc && jest server.test.js",
+    "test": "tsc && jest ./backend/__tests__/server.test.js",
     "seed-test": "tsc && ts-node db/seeds/seed-test.js",
     "start": "node dist/server.js",
     "postinstall": "tsc",

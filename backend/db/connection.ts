@@ -18,6 +18,7 @@ if (ENV === "test" || ENV === "development") {
   const dbName = "char-portfolio-test";
   db = client.db(dbName);
 } else if (ENV === "production") {
+  //may wish to change this to use a different seed
   client = new MongoClient(`${process.env.MONGODB_URI}`); //this will likely need changing
   // Database Name
   const dbName = "char-portfolio-prod";
