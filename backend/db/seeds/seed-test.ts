@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import { saltRounds } from "../../exports";
 import charsData from "../data/test/chars";
 
+//currently used for all; may wish to change
+
 export async function seed() {
 
   //hash password data for testing
