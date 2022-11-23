@@ -7,7 +7,8 @@
     "test": "tsc && jest server.test.js",
     "seed-test": "tsc && ts-node db/seeds/seed-test.ts",
     "start": "nodemon server.ts",
-    "seedandtest": "npm run seed-test && npm run test"
+    "seedandtest": "npm run seed-test && npm run test",
+    "seed:prod": "NODE_ENV=production  npm run seed-test"
   },
   "keywords": [],
   "author": "",
