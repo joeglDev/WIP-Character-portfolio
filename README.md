@@ -10,6 +10,8 @@ A personal project to display user generated fictional characters in an aestheti
 
 ## Hosted version: Work-In-Progress
 
+1. Back-end API hosted on heroku: `https://character-portfolio-api.herokuapp.com/`
+
 ### MongoDB client connection
 
 The connection string for mongoDB is stored in a .env file under `MONGODB_URL=<connection string>`. Please report any database errors to [joegilbertdev](https://github.com/joeglDev).
