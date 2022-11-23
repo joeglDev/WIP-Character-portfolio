@@ -22,6 +22,10 @@ The connection string for mongoDB is stored in a .env file under `MONGODB_URL=<c
 4. In backend create a `.env` file with the follwoing information e.g. `MONGODB_URL=mongodb://localhost:NUMBER`.
 5. To run backend use the command `npm run start` from backend and frontend run command `npm start` from frontend.
 
+## API Documentation
+
+1. API documentation can be found within backend/apiDocumentation.ts or by calling the api with "/" endpoint.
+
 ## Acknowledgements
 
 Special thanks to the following for their aid:
