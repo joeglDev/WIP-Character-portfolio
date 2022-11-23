@@ -403,6 +403,12 @@ describe("update existing character", () => {
   });
 });
 
+describe("route", () => {
+test("200- returns API documentation", () => {
+return request(app).get(Endpoints.route).expect(200)
+});
+});
+
 /*
 {ownerUsername: "",
     name: "",
