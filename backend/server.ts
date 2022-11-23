@@ -6,7 +6,7 @@ import Endpoints from "./Endpoints";
 import { handleCustomErrors, handleInvalidPaths } from "./errors";
 
 const app = express();
-const port = 9124;
+const {port = 9124} =process.env;
 
 //middleware
 app.use(
