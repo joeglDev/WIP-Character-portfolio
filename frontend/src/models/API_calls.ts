@@ -1,6 +1,6 @@
 export const loginModel = async (username: string, password: string) => {
   console.log("attempting api call");
-  const rawResponse = await fetch("http://localhost:9124/login", {
+  const rawResponse = await fetch("https://character-portfolio-api.herokuapp.com/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +13,7 @@ export const loginModel = async (username: string, password: string) => {
 
 export const registrationModel = async (username: string, password: string) => {
   console.log("attempting api call");
-  const rawResponse = await fetch("http://localhost:9124/register", {
+  const rawResponse = await fetch("https://character-portfolio-api.herokuapp.com/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,21 +25,21 @@ export const registrationModel = async (username: string, password: string) => {
 };
 
 export const pullAllCharDataModel = async () => {
-  const rawResponse = await fetch("http://localhost:9124/characters");
+  const rawResponse = await fetch("https://character-portfolio-api.herokuapp.com/characters");
   const response = await rawResponse.json();
   return response;
 };
 
 export const pullUserCharDataModel = async (username: string) => {
   const rawResponse = await fetch(
-    `http://localhost:9124/characters/${username}`
+    `https://character-portfolio-api.herokuapp.com/characters/${username}`
   );
   const response = await rawResponse.json();
   return response;
 };
 
 export const deleteCharacterModel = async (username: string, id: string) => {
-  const rawResponse = await fetch(`http://localhost:9124/characters/${username}/${id}`, {
+  const rawResponse = await fetch(`https://character-portfolio-api.herokuapp.com/characters/${username}/${id}`, {
     method: "DELETE",
   });
   const response = await rawResponse.json();
@@ -47,7 +47,7 @@ export const deleteCharacterModel = async (username: string, id: string) => {
 };
 
 export const uploadNewCharacter = async (username: string, characterObject : any)  => {
-  const rawResponse = await fetch(`http://localhost:9124/characters/${username}`, {
+  const rawResponse = await fetch(`https://character-portfolio-api.herokuapp.com/characters/${username}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
