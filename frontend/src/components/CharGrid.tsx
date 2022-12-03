@@ -36,8 +36,16 @@ const CharGrid = () => {
   };
 
   const pullUserCharData = async (event: React.MouseEvent<HTMLElement>) => {
-    const actual = await pullUserCharDataModel(user);
-    setCharData(actual.user_characters);
+    //admin override code 
+    if (user === "Hiroji_the_Sergal" || user === "Hiroji") {
+      const actual = await pullUserCharDataModel("Hiroji_the_Sergal");
+      const actualTwo = await pullUserCharDataModel("Hiroji");
+      const actualConcat = actual.user_characters.concat(actualTwo.user_characters);
+      setCharData(actualConcat);
+    } else {
+      const actual = await pullUserCharDataModel(user);
+      setCharData(actual.user_characters);
+    }
   };
 
   const deleteCharacter = async (event: React.MouseEvent<HTMLElement>) => {
