@@ -12,7 +12,7 @@ Please keep content to that which is legal in the UK and Safe For Work / no adul
 1. Replace image link with an amazon S3 bucket. Currently you add images by linking to an image hosted elsewhere. This is a poor user experience and sometimes fails so in the future I will implement a proper image upload function using a Amazon S3 bucket or similar.
 2. Ability to edit an existing character (backend CRUD done just need to add to the front-end).
 3. Pride flag CSS!
-etc
+
 
 ## Hosted version: 
 
