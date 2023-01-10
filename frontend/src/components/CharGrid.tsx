@@ -62,6 +62,7 @@ const CharGrid = () => {
           if (char._id !== selectedCharacter._id) {
             return char;
           }
+          return char;
         });
         setCharData(newCharData);
         setSelectedCharacter(undefined);
@@ -122,7 +123,7 @@ const CharGrid = () => {
       <ul className="charGrid__grid">
         {Array.isArray(charData)
           ? charData.map((char) => {
-              return <CharGridItem char={char} key={char._id}></CharGridItem>;
+              return <CharGridItem  char={char} key={char._id}></CharGridItem>;
             })
           : null}
       </ul>
